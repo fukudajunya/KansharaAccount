@@ -32,6 +32,30 @@ function doPost(e) {
   if(type == "text"){
     var text = JSON.parse(json).events[0].message.text;
     switch(text){
+      case "連絡先" :
+        var data = returnMessage(token,"■連絡先\n代表\nXXX");
+        break;
+      case "振込口座" :
+        var data = returnMessage(token, "口座情報\nYYYY\nソン君の口座にお金いっぱい入れてね！");
+        break;
+      case "イベント連絡" :
+         var data =  {
+          "replyToken" : token, 
+          "messages" : [ret_msg_inst]
+        };
+        break;
+      case "キャンセル連絡" :
+        var data =returnMessage(token, "この人に連絡してね。\n\n■まりな\nYYYY");
+        break;
+      case "サークルスクエア":
+        var data = returnMessage(token, "url");
+        break;
+      case "振り動画" :
+        var data =  {
+          "replyToken" : token, 
+          "messages" : [ret_msg_mv]
+        };
+        break;
       case "購入申請" :
         var data = {
           "replyToken" : token, 
@@ -408,4 +432,82 @@ ret_msg_cancel_payment = {
     ]
   },
   "altText": "支払い確認キャンセル"
+}
+
+ret_msg =  {
+  "type": "template",
+  "template": {
+    "type" : "carousel",
+    "columns": [
+      {
+        "title": "連絡先が知りたい",
+        "text": "連絡先",
+        "actions": [{"type": "message",
+                     "label": "連絡先",
+                     "text": "連絡先"}]
+      },
+      {
+        "title": "振込口座が知りたい",
+        "text": "振込口座",
+        "actions": [{"type": "message",
+                     "label": "振込口座",
+                     "text": "振込口座"}]
+      }
+    ]
+  },
+  "altText": "一般情報"
+}
+
+ret_msg_inst = {
+  "type": "template",
+  "template": {
+    "type" : "carousel",
+    "columns": [
+      {
+        "title": "祭り参加のキャンセルをしたい",
+        "text": "キャンセル連絡",
+        "actions": [{"type": "message",
+                     "label": "キャンセル連絡",
+                     "text": "キャンセル連絡"}]
+      },
+      {
+        "title": "イベントに参加したい",
+        "text": "イベント参加申請",
+        "actions": [{"type": "message",
+                     "label": "イベント参加",
+                     "text": "サークルスクエア"}]
+      }
+    ]
+  },
+  "altText": "イベントに関する連絡"
+}
+
+ret_msg_mv = {
+  "type": "template",
+  "template": {
+    "type" : "carousel",
+    "columns": [{
+      "title": "解説動画1",
+      "text": "①から②まで",
+      "actions": [{"type": "uri",
+                   "label": "振り動画1(0:00 - 0:30)",
+                   "uri": "https://www.youtube.com/watch?v=ABtP-9WyRxQ&feature=youtu.be"},
+                  {"type": "uri",
+                   "label": "振り動画2(0:30 - 1:00)",
+                   "uri": "https://www.youtube.com/watch?v=XOSLKT8JXmY&feature=youtu.be"},
+                 ]
+                  },
+                  {
+                  "title": "解説動画2",
+                  "text": "③から④まで",
+                  "actions": [{"type": "uri",
+                  "label": "振り動画3(1:00 - 1:30)",
+                  "uri": "https://www.youtube.com/watch?v=yVqfh0IrrRQ&feature=youtu.be"},
+                  {"type": "uri",
+                  "label": "振り動画4(1:30 - 2:00)",
+                  "uri": "https://www.youtube.com/watch?v=s11F2xVm_94&feature=youtu.be"},
+                 ]
+    }]
+  },
+  "altText": "振り動画"
 }
