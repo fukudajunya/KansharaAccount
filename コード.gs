@@ -1,5 +1,4 @@
 // LINE認証
-// 確認
 var secret_token = "DIc4nUB883QVOrxbKlYr/tdnaJY/uFUZuNCyw59ETsUsGlUyQ8xVIpLc8F23oUoBD6NeY/aXeb8oXoQQKas/uLAVrdbvd5i/rFBA/Gjm7zKdiiAeSrJ0UbSA0DC0X6wWS+EEDBfHAWm2n55BORN98AdB04t89/1O/w1cDnyilFU="
 var secret = "Bearer " + secret_token;
 
@@ -48,7 +47,7 @@ function doPost(e) {
         var data =returnMessage(token, "この人に連絡してね。\n\n■まりな\nYYYY");
         break;
       case "サークルスクエア":
-        var data = returnMessage(token, "url");
+        var data = returnMessage(token, "https://www.c-sqr.net/cs75424/News.html");
         break;
       case "振り動画" :
         var data =  {
@@ -60,6 +59,13 @@ function doPost(e) {
         var data = {
           "replyToken" : token, 
           "messages" : [ret_msg_purchase_application]
+        };
+        break;
+      case "受け取り確認" :
+        // ToDo 物品受け取り申請時にカルーセルメニューを表示する
+        var data = {
+          "replyToken" : token, 
+          "messages" : [ret_msg_received_application]
         };
         break;
       case "鳴子(a)" :
@@ -85,6 +91,14 @@ function doPost(e) {
       case "衣装(p)" :
         var item = "衣装";
         var data = paymentStatusInfo(userId,userName,item,token);
+        break;
+      case "鳴子(r)" :
+        var item = "鳴子";
+        var data = receivedStatusInfo(userId,userName,item,token);
+        break;
+      case "衣装(r)" :
+        var item = "衣装";
+        var data = receivedStatusInfo(userId,userName,item,token);
         break;
       case "申請取消" :
         var data = {
@@ -152,7 +166,8 @@ function purchaseApplicationInfo(userId,userName,item,price,setToken){
       };
       return data;
     }else if(count == 2){
-      ss.appendRow([userId, userName,date,item,'false',price]);
+      // 受け取りフラグFalseで追加
+      ss.appendRow([userId, userName,date,item,'false','false',price]);
       var data = {
         "replyToken" : setToken, 
         "messages" : [{
@@ -213,6 +228,51 @@ function paymentStatusInfo(userId, userName,item,setToken){
   }        
 }
 
+// 物品受け取り情報を記録する
+function receivedStatusInfo(userId, userName,item,setToken){
+  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1qCla9GOzlP0e2XHqbyWb8N66RdaeU8ClHCuXhcaAC3k");
+  var ss = sheet.getSheets()[0];
+  ss.sort(3,false);
+  var lastRow = ss.getLastRow();
+  var date = new Date();
+  var count = lastRow + 1;
+  for(var i=1; i<=lastRow+1; i++){
+    if(ss.getRange(i, 1).getValue() == userId && ss.getRange(i, 5).getValue() == false && ss.getRange(i,4).getValue() == item){
+      var data = {
+        "replyToken" : setToken, 
+        "messages" : [{
+          "type" : "text",
+          "text" : item + "の支払いが完了していません。支払いが済んだか確認してください。"
+        }]
+      };
+      return data;
+    }else if(ss.getRange(i, 1).getValue() == userId && ss.getRange(i, 5).getValue() == true && ss.getRange(i, 4).getValue() == item && ss.getRange(i, 6).getValue() == false){
+      ss.getRange(i, 6).setValue('true');
+      ss.getRange(i, 3).setValue(date);
+      var data = {
+        "replyToken" : setToken, 
+        "messages" : [{
+          "type" : "text",
+          "text" : item + "の受け取り確認ありがとうございます。"
+        }]
+      };
+      return data;
+    }else if(count == 2){
+      var data = {
+        "replyToken" : setToken, 
+        "messages" : [{
+          "type" : "text",
+          "text" : item + "の購入申請がされていません。購入申請から申請をお願いします。"
+        }]
+      };
+      return data;
+    }else{
+      count -= 1;
+    }
+  }
+}
+
+
 // 購入申請キャンセル
 function cancelPurchaseApplication(userId,userName,item,setToken){
   var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1qCla9GOzlP0e2XHqbyWb8N66RdaeU8ClHCuXhcaAC3k");
@@ -247,6 +307,7 @@ function cancelPurchaseApplication(userId,userName,item,setToken){
 }
 
 // 支払い確認キャンセル
+// ToDo 受け取りフラグがTrueの場合、キャンセルができないようにする
 function cancelPaymentStatus(userId,userName,item,setToken){
   var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1qCla9GOzlP0e2XHqbyWb8N66RdaeU8ClHCuXhcaAC3k");
   var ss = sheet.getSheets()[0];
@@ -255,7 +316,7 @@ function cancelPaymentStatus(userId,userName,item,setToken){
   var count = lastRow + 1;
   for(var i=1; i<= lastRow+1; i++){
     if(ss.getRange(i, 1).getValue() == userId && ss.getRange(i,4).getValue() == item){
-      if(ss.getRange(i, 5).getValue() == true){
+      if(ss.getRange(i, 5).getValue() == true && ss.getRange(i, 6).getValue() == false){
         var data = {
           "replyToken" : setToken, 
           "messages" : [{
@@ -289,13 +350,6 @@ function cancelPaymentStatus(userId,userName,item,setToken){
     }
   }
 }
-
-
-
-
-
-
-
 
 function returnMessage(setToken, setText)  {
   var data = {
@@ -384,6 +438,30 @@ ret_msg_payment_status = {
     ]
   },
   "altText": "支払い確認"
+}
+
+ret_msg_received_application = {
+  "type": "template",
+  "template": {
+    "type" : "carousel",
+    "columns": [
+      {
+        "title": "鳴子を受け取りました",
+        "text" : "鳴子",
+        "actions": [{"type": "message",
+                     "label": "鳴子",
+                     "text": "鳴子(r)"}]
+      },
+      {
+        "title": "衣装を受け取りました",
+        "text" : "衣装",
+        "actions": [{"type": "message",
+                     "label": "衣装",
+                     "text": "衣装(r)"}]
+      }
+    ]
+  },
+  "altText": "物品受け取り確認"
 }
 
 ret_msg_cancel_application = {
