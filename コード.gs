@@ -67,11 +67,16 @@ function doPost(e) {
           "messages" : [ret_msg_received_application]
         };
         break;
-      case "鳴子(a)" :
-        var item = "鳴子";
+      case "鳴子/1組(a)" :
+        var item = "鳴子/1組";
         var price = 2500;
         var data = purchaseApplicationInfo(userId,userName,item,price,token);
         break;
+      case "鳴子/片方(a)" :
+        var item = "鳴子/片方";
+        var price = 1250;
+        var data = purchaseApplicationInfo(userId,userName,item,price,token);
+        break;  
       case "衣装(a)" :
         var item = "衣装";
         var price = 20000;
@@ -83,18 +88,26 @@ function doPost(e) {
           "messages" : ret_msg_payment_status
         };
         break;
-      case "鳴子(p)" :
-        var item = "鳴子";
+      case "鳴子/1組(p)" :
+        var item = "鳴子/1組";
         var data = paymentStatusInfo(userId,userName,item,token);
         break;
+      case "鳴子/片方(p)" :
+        var item = "鳴子/片方";
+        var data = paymentStatusInfo(userId,userName,item,token);
+        break;  
       case "衣装(p)" :
         var item = "衣装";
         var data = paymentStatusInfo(userId,userName,item,token);
         break;
-      case "鳴子(r)" :
-        var item = "鳴子";
+      case "鳴子/1組(r)" :
+        var item = "鳴子/1組";
         var data = receivedStatusInfo(userId,userName,item,token);
         break;
+      case "鳴子/片方(r)" :
+        var item = "鳴子/片方";
+        var data = receivedStatusInfo(userId,userName,item,token);
+        break;  
       case "衣装(r)" :
         var item = "衣装";
         var data = receivedStatusInfo(userId,userName,item,token);
@@ -105,10 +118,14 @@ function doPost(e) {
           "messages" : [ret_msg_cancel_application]
         };
         break;
-      case "鳴子(ad)" :
-        var item = "鳴子";
+      case "鳴子/1組(ad)" :
+        var item = "鳴子/1組";
         var data = cancelPurchaseApplication(userId,userName,item,token);
         break;
+      case "鳴子/片方(ad)" :
+        var item = "鳴子/片方";
+        var data = cancelPurchaseApplication(userId,userName,item,token);
+        break;  
       case "衣装(ad)" :
         var item = "衣装";
         var data = cancelPurchaseApplication(userId,userName,item,token);
@@ -119,10 +136,14 @@ function doPost(e) {
           "messages" : [ret_msg_cancel_payment]
         };
         break;
-      case "鳴子(pd)" :
-        var item = "鳴子";
+      case "鳴子/1組(pd)" :
+        var item = "鳴子/1組";
         var data = cancelPaymentStatus(userId,userName,item,token);
         break;
+      case "鳴子/片方(pd)" :
+        var item = "鳴子/片方";
+        var data = cancelPaymentStatus(userId,userName,item,token);
+        break;  
       case "衣装(pd)" :
         var item = "衣装";
         var data = cancelPaymentStatus(userId,userName,item,token);
@@ -393,15 +414,22 @@ ret_msg_purchase_application = {
     "type" : "carousel",
     "columns": [
       {
-        "title": "鳴子を買いたい",
-        "text" : "鳴子",
+        "title": "鳴子/1組を買いたい",
+        "text" : "鳴子/1組 ￥2,500",
         "actions": [{"type": "message",
-                     "label": "鳴子",
-                     "text": "鳴子(a)"}]
+                     "label": "鳴子/1組",
+                     "text": "鳴子/1組(a)"}]
+      },
+      {
+        "title": "鳴子/片方を買いたい",
+        "text" : "鳴子/片方 ￥1,250",
+        "actions": [{"type": "message",
+                     "label": "鳴子/片方",
+                     "text": "鳴子/片方(a)"}]
       },
       {
         "title": "衣装を買いたい",
-        "text" : "衣装",
+        "text" : "衣装 ￥20,000",
         "actions": [{"type": "message",
                      "label": "衣装",
                      "text": "衣装(a)"}]
@@ -412,29 +440,36 @@ ret_msg_purchase_application = {
 }
 
 ret_msg_payment_status = [{"type": "text",
-                          "text": "購入申請後、振込を行う場合は以下の口座に振り込んでね!\n■口座\nXXX\n\n振込が完了している場合は、以下のメニューから支払いが完了したものを選択してください。"},{
-                            "type": "template",
-                              "template": {
-                                "type" : "carousel",
-                                  "columns": [
-                                    {
-                                      "title": "鳴子の支払い確認",
-                                      "text" : "鳴子",
-                                      "actions": [{"type": "message",
-                                                   "label": "鳴子",
-                                                   "text": "鳴子(p)"}]
-                                    },
-                                    {
-                                      "title": "衣装の支払い確認",
-                                      "text" : "衣装",
-                                      "actions": [{"type": "message",
-                                                   "label": "衣装",
-                                                   "text": "衣装(p)"}]
-                                    }
-                                  ]
-                              },
-                                "altText": "支払い確認"
-                          }]
+                           "text": "購入申請後、振込を行う場合は以下の口座に振り込んでね!\n■口座\nXXX\n\n振込が完了している場合は、以下のメニューから支払いが完了したものを選択してください。"},{
+                             "type": "template",
+                             "template": {
+                               "type" : "carousel",
+                               "columns": [
+                                 {
+                                   "title": "鳴子/1組の支払い確認",
+                                   "text" : "鳴子/1組",
+                                   "actions": [{"type": "message",
+                                                "label": "鳴子/1組",
+                                                "text": "鳴子/1組(p)"}]
+                                 },
+                                 {
+                                   "title": "鳴子/片方の支払い確認",
+                                   "text" : "鳴子/片方",
+                                   "actions": [{"type": "message",
+                                                "label": "鳴子/片方",
+                                                "text": "鳴子/片方(p)"}]
+                                 },
+                                 {
+                                   "title": "衣装の支払い確認",
+                                   "text" : "衣装",
+                                   "actions": [{"type": "message",
+                                                "label": "衣装",
+                                                "text": "衣装(p)"}]
+                                 }
+                               ]
+                             },
+                             "altText": "支払い確認"
+                           }]
 
 ret_msg_received_application = {
   "type": "template",
@@ -442,11 +477,18 @@ ret_msg_received_application = {
     "type" : "carousel",
     "columns": [
       {
-        "title": "鳴子を受け取りました",
-        "text" : "鳴子",
+        "title": "鳴子/1組を受け取りました",
+        "text" : "鳴子/1組",
         "actions": [{"type": "message",
-                     "label": "鳴子",
-                     "text": "鳴子(r)"}]
+                     "label": "鳴子/1組",
+                     "text": "鳴子/1組(r)"}]
+      },
+      {
+        "title": "鳴子/片方を受け取りました",
+        "text" : "鳴子/片方",
+        "actions": [{"type": "message",
+                     "label": "鳴子/片方",
+                     "text": "鳴子/片方(r)"}]
       },
       {
         "title": "衣装を受け取りました",
@@ -466,11 +508,18 @@ ret_msg_cancel_application = {
     "type" : "carousel",
     "columns": [
       {
-        "title": "鳴子の購入申請をキャンセルしたい",
-        "text" : "鳴子",
+        "title": "鳴子/1組の購入申請をキャンセルしたい",
+        "text" : "鳴子/1組",
         "actions": [{"type": "message",
-                     "label": "鳴子",
-                     "text": "鳴子(ad)"}]
+                     "label": "鳴子/1組",
+                     "text": "鳴子/1組(ad)"}]
+      },
+      {
+        "title": "鳴子/片方の購入申請をキャンセルしたい",
+        "text" : "鳴子/片方",
+        "actions": [{"type": "message",
+                     "label": "鳴子/片方",
+                     "text": "鳴子/片方(ad)"}]
       },
       {
         "title": "衣装の購入申請をキャンセルしたい",
@@ -490,11 +539,18 @@ ret_msg_cancel_payment = {
     "type" : "carousel",
     "columns": [
       {
-        "title": "鳴子の支払い確認をキャンセルしたい",
-        "text" : "鳴子",
+        "title": "鳴子/1組の支払い確認をキャンセルしたい",
+        "text" : "鳴子/1組",
         "actions": [{"type": "message",
-                     "label": "鳴子",
-                     "text": "鳴子(pd)"}]
+                     "label": "鳴子/1組",
+                     "text": "鳴子/1組(pd)"}]
+      },
+      {
+        "title": "鳴子/片方の支払い確認をキャンセルしたい",
+        "text" : "鳴子/片方",
+        "actions": [{"type": "message",
+                     "label": "鳴子/片方",
+                     "text": "鳴子/片方(pd)"}]
       },
       {
         "title": "衣装の支払い確認をキャンセルしたい",
