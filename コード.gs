@@ -38,7 +38,7 @@ function doPost(e) {
         var data = returnMessage(token, "口座情報\nYYYY\nソン君の口座にお金いっぱい入れてね！");
         break;
       case "イベント連絡" :
-         var data =  {
+        var data =  {
           "replyToken" : token, 
           "messages" : [ret_msg_inst]
         };
@@ -62,7 +62,6 @@ function doPost(e) {
         };
         break;
       case "受け取り確認" :
-        // ToDo 物品受け取り申請時にカルーセルメニューを表示する
         var data = {
           "replyToken" : token, 
           "messages" : [ret_msg_received_application]
@@ -78,10 +77,10 @@ function doPost(e) {
         var price = 20000;
         var data = purchaseApplicationInfo(userId,userName,item,price,token);
         break;
-      case "支払い確認" :
+      case "支払い関連" :
         var data = {
           "replyToken" : token, 
-          "messages" : [ret_msg_payment_status]
+          "messages" : ret_msg_payment_status
         };
         break;
       case "鳴子(p)" :
@@ -166,7 +165,6 @@ function purchaseApplicationInfo(userId,userName,item,price,setToken){
       };
       return data;
     }else if(count == 2){
-      // 受け取りフラグFalseで追加
       ss.appendRow([userId, userName,date,item,'false','false',price]);
       var data = {
         "replyToken" : setToken, 
@@ -186,7 +184,6 @@ function purchaseApplicationInfo(userId,userName,item,price,setToken){
 function paymentStatusInfo(userId, userName,item,setToken){
   var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1qCla9GOzlP0e2XHqbyWb8N66RdaeU8ClHCuXhcaAC3k");
   var ss = sheet.getSheets()[0];
-  // シートを日付でソートする(降順)
   ss.sort(3,false);
   var lastRow = ss.getLastRow();
   var date = new Date();
@@ -307,7 +304,6 @@ function cancelPurchaseApplication(userId,userName,item,setToken){
 }
 
 // 支払い確認キャンセル
-// ToDo 受け取りフラグがTrueの場合、キャンセルができないようにする
 function cancelPaymentStatus(userId,userName,item,setToken){
   var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1qCla9GOzlP0e2XHqbyWb8N66RdaeU8ClHCuXhcaAC3k");
   var ss = sheet.getSheets()[0];
@@ -362,7 +358,6 @@ function returnMessage(setToken, setText)  {
   return data;
 };
 
-
 function getUserName(userId){
   var url = 'https://api.line.me/v2/bot/profile/' + userId;
   var response = UrlFetchApp.fetch(url,{
@@ -416,29 +411,30 @@ ret_msg_purchase_application = {
   "altText": "購入申請"
 }
 
-ret_msg_payment_status = {
-  "type": "template",
-  "template": {
-    "type" : "carousel",
-    "columns": [
-      {
-        "title": "鳴子の支払い確認",
-        "text" : "鳴子",
-        "actions": [{"type": "message",
-                     "label": "鳴子",
-                     "text": "鳴子(p)"}]
-      },
-      {
-        "title": "衣装の支払い確認",
-        "text" : "衣装",
-        "actions": [{"type": "message",
-                     "label": "衣装",
-                     "text": "衣装(p)"}]
-      }
-    ]
-  },
-  "altText": "支払い確認"
-}
+ret_msg_payment_status = [{"type": "text",
+                          "text": "購入申請後、振込を行う場合は以下の口座に振り込んでね!\n■口座\nXXX\n\n振込が完了している場合は、以下のメニューから支払いが完了したものを選択してください。"},{
+                            "type": "template",
+                              "template": {
+                                "type" : "carousel",
+                                  "columns": [
+                                    {
+                                      "title": "鳴子の支払い確認",
+                                      "text" : "鳴子",
+                                      "actions": [{"type": "message",
+                                                   "label": "鳴子",
+                                                   "text": "鳴子(p)"}]
+                                    },
+                                    {
+                                      "title": "衣装の支払い確認",
+                                      "text" : "衣装",
+                                      "actions": [{"type": "message",
+                                                   "label": "衣装",
+                                                   "text": "衣装(p)"}]
+                                    }
+                                  ]
+                              },
+                                "altText": "支払い確認"
+                          }]
 
 ret_msg_received_application = {
   "type": "template",
@@ -542,18 +538,18 @@ ret_msg_inst = {
     "type" : "carousel",
     "columns": [
       {
-        "title": "祭り参加のキャンセルをしたい",
-        "text": "キャンセル連絡",
-        "actions": [{"type": "message",
-                     "label": "キャンセル連絡",
-                     "text": "キャンセル連絡"}]
-      },
-      {
         "title": "イベントに参加したい",
         "text": "イベント参加申請",
         "actions": [{"type": "message",
                      "label": "イベント参加",
                      "text": "サークルスクエア"}]
+      },
+      {
+        "title": "祭り参加のキャンセルをしたい",
+        "text": "キャンセル連絡先",
+        "actions": [{"type": "message",
+                     "label": "キャンセル連絡",
+                     "text": "キャンセル連絡"}]
       }
     ]
   },
