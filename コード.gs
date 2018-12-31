@@ -537,32 +537,67 @@ ret_msg_cancel_payment = {
   "type": "template",
   "template": {
     "type" : "carousel",
-    "columns": [
-      {
-        "title": "鳴子/1組の支払い確認をキャンセルしたい",
-        "text" : "鳴子/1組",
-        "actions": [{"type": "message",
-                     "label": "鳴子/1組",
-                     "text": "鳴子/1組(pd)"}]
-      },
-      {
-        "title": "鳴子/片方の支払い確認をキャンセルしたい",
-        "text" : "鳴子/片方",
-        "actions": [{"type": "message",
-                     "label": "鳴子/片方",
-                     "text": "鳴子/片方(pd)"}]
-      },
-      {
-        "title": "衣装の支払い確認をキャンセルしたい",
-        "text" : "衣装",
-        "actions": [{"type": "message",
-                     "label": "衣装",
-                     "text": "衣装(pd)"}]
-      }
-    ]
+    "columns": [{
+      "title": "鳴子の支払い確認をキャンセルしたい",
+      "text": "鳴子",
+      "actions": [{"type": "message",
+                   "label": "鳴子/1組",
+                   "text": "鳴子/1組(pd)"},
+                  {"type": "message",
+                   "label": "鳴子/片方",
+                   "text": "鳴子/片方(pd)"},
+                 ]
+                  },
+                  {
+                  "title": "衣装の支払い確認をキャンセルしたい",
+                  "text": "衣装",
+                  "actions": [{"type": "message",
+                  "label": "衣装",
+                  "text": "衣装(pd)"},
+                  {"type": "message",
+                  "label": "衣装",
+                  "text": "衣装(pd)"},
+                 ]
+    }]
   },
   "altText": "支払い確認キャンセル"
 }
+
+/*
+ret_msg_cancel_payment = {
+"type": "template",
+"template": {
+"type" : "carousel",
+"columns": [
+{
+"title": "鳴子/1組の支払い確認をキャンセルしたい",
+"text" : "鳴子/1組",
+"actions": [{"type": "message",
+"label": "鳴子/1組",
+"text": "鳴子/1組(pd)"},
+{"type": "message",
+"label": "鳴子/片方",
+"text": "鳴子/片方(pd)"},]
+},
+{
+"title": "鳴子/片方の支払い確認をキャンセルしたい",
+"text" : "鳴子/片方",
+"actions": [{"type": "message",
+"label": "鳴子/片方",
+"text": "鳴子/片方(pd)"}]
+},
+{
+"title": "衣装の支払い確認をキャンセルしたい",
+"text" : "衣装",
+"actions": [{"type": "message",
+"label": "衣装",
+"text": "衣装(pd)"}]
+}
+]
+},
+"altText": "支払い確認キャンセル"
+}
+*/
 
 ret_msg =  {
   "type": "template",
