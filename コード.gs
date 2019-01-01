@@ -1,4 +1,10 @@
 // LINE認証
+/*
+* ToDo
+* FlexMessageを使う方法を調査
+*
+*/
+
 var secret_token = "DIc4nUB883QVOrxbKlYr/tdnaJY/uFUZuNCyw59ETsUsGlUyQ8xVIpLc8F23oUoBD6NeY/aXeb8oXoQQKas/uLAVrdbvd5i/rFBA/Gjm7zKdiiAeSrJ0UbSA0DC0X6wWS+EEDBfHAWm2n55BORN98AdB04t89/1O/w1cDnyilFU="
 var secret = "Bearer " + secret_token;
 
@@ -149,11 +155,17 @@ function doPost(e) {
         var data = cancelPaymentStatus(userId,userName,item,token);
         break;
       default :
-        var data = returnMessage(token, "メニューから知りたい情報を探してね!");
+        var data = {
+          "replyToken" : token,
+          "messages" : quick_rep
+        };
         break;
     }
   }else{
-    var data = returnMessage(token, "メニューから知りたい情報を探してね!");
+    var data = {
+          "replyToken" : token,
+          "messages" : quick_rep
+        };
   };
   
   
@@ -563,42 +575,6 @@ ret_msg_cancel_payment = {
   "altText": "支払い確認キャンセル"
 }
 
-/*
-ret_msg_cancel_payment = {
-"type": "template",
-"template": {
-"type" : "carousel",
-"columns": [
-{
-"title": "鳴子/1組の支払い確認をキャンセルしたい",
-"text" : "鳴子/1組",
-"actions": [{"type": "message",
-"label": "鳴子/1組",
-"text": "鳴子/1組(pd)"},
-{"type": "message",
-"label": "鳴子/片方",
-"text": "鳴子/片方(pd)"},]
-},
-{
-"title": "鳴子/片方の支払い確認をキャンセルしたい",
-"text" : "鳴子/片方",
-"actions": [{"type": "message",
-"label": "鳴子/片方",
-"text": "鳴子/片方(pd)"}]
-},
-{
-"title": "衣装の支払い確認をキャンセルしたい",
-"text" : "衣装",
-"actions": [{"type": "message",
-"label": "衣装",
-"text": "衣装(pd)"}]
-}
-]
-},
-"altText": "支払い確認キャンセル"
-}
-*/
-
 ret_msg =  {
   "type": "template",
   "template": {
@@ -676,3 +652,53 @@ ret_msg_mv = {
   },
   "altText": "振り動画"
 }
+
+// QuickReplyの実装
+quick_rep = [{
+  "type": "text",
+  "text": "知りたい情報をここか下のメニューから探してね。",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "購入申請を行いたい！",
+          "text" : "購入申請"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "支払い口座や支払い確認を行いたい！",
+          "text" : "支払い関連"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "物品を受け取ったことを報告したい！",
+          "text" : "受け取り確認"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "イベントに関して分からないことがある！",
+          "text" : "イベント連絡"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "振り動画を見たい！",
+          "text": "振り動画"
+        }
+      }
+    ]
+  }
+}]
