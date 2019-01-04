@@ -1,9 +1,4 @@
 // LINE認証
-/*
-* ToDo
-* FlexMessageを使う方法を調査
-*
-*/
 
 var secret_token = "DIc4nUB883QVOrxbKlYr/tdnaJY/uFUZuNCyw59ETsUsGlUyQ8xVIpLc8F23oUoBD6NeY/aXeb8oXoQQKas/uLAVrdbvd5i/rFBA/Gjm7zKdiiAeSrJ0UbSA0DC0X6wWS+EEDBfHAWm2n55BORN98AdB04t89/1O/w1cDnyilFU="
 var secret = "Bearer " + secret_token;
@@ -43,6 +38,9 @@ function doPost(e) {
       case "振込口座" :
         var data = returnMessage(token, "口座情報\nYYYY\nソン君の口座にお金いっぱい入れてね！");
         break;
+      case "料金" :
+        var data = returnMessage(token, "・鳴子/片方:￥1,250\n・鳴子/1組:￥2,500\n・衣装:￥20,000");
+        break;  
       case "イベント連絡" :
         var data =  {
           "replyToken" : token, 
@@ -64,13 +62,15 @@ function doPost(e) {
       case "購入申請" :
         var data = {
           "replyToken" : token, 
-          "messages" : [ret_msg_purchase_application]
+          //"messages" : [ret_msg_purchase_application]
+          "messages" : quick_rep_purchase
         };
         break;
       case "受け取り確認" :
         var data = {
           "replyToken" : token, 
-          "messages" : [ret_msg_received_application]
+          "messages" : quick_rep_receive
+          // "messages" : [ret_msg_received_application]
         };
         break;
       case "鳴子/1組(a)" :
@@ -83,15 +83,36 @@ function doPost(e) {
         var price = 1250;
         var data = purchaseApplicationInfo(userId,userName,item,price,token);
         break;  
-      case "衣装(a)" :
-        var item = "衣装";
+      case "衣装/XS(a)" :
+        var item = "衣装/XS";
+        var price = 20000;
+        var data = purchaseApplicationInfo(userId,userName,item,price,token);
+        break;
+      case "衣装/S(a)" :
+        var item = "衣装/S";
+        var price = 20000;
+        var data = purchaseApplicationInfo(userId,userName,item,price,token);
+        break;
+      case "衣装/M(a)" :
+        var item = "衣装/M";
+        var price = 20000;
+        var data = purchaseApplicationInfo(userId,userName,item,price,token);
+        break;
+      case "衣装/L(a)" :
+        var item = "衣装/L";
+        var price = 20000;
+        var data = purchaseApplicationInfo(userId,userName,item,price,token);
+        break;
+      case "衣装/XL(a)" :
+        var item = "衣装/XL";
         var price = 20000;
         var data = purchaseApplicationInfo(userId,userName,item,price,token);
         break;
       case "支払い関連" :
         var data = {
           "replyToken" : token, 
-          "messages" : ret_msg_payment_status
+          // "messages" : ret_msg_payment_status
+          "messages" : quick_rep_payment
         };
         break;
       case "鳴子/1組(p)" :
@@ -102,8 +123,24 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = paymentStatusInfo(userId,userName,item,token);
         break;  
-      case "衣装(p)" :
-        var item = "衣装";
+      case "衣装/XS(p)" :
+        var item = "衣装/XS";
+        var data = paymentStatusInfo(userId,userName,item,token);
+        break;
+      case "衣装/S(p)" :
+        var item = "衣装/S";
+        var data = paymentStatusInfo(userId,userName,item,token);
+        break;
+      case "衣装/M(p)" :
+        var item = "衣装/M";
+        var data = paymentStatusInfo(userId,userName,item,token);
+        break;
+      case "衣装/L(p)" :
+        var item = "衣装/L";
+        var data = paymentStatusInfo(userId,userName,item,token);
+        break;
+      case "衣装/XL(p)" :
+        var item = "衣装/XL";
         var data = paymentStatusInfo(userId,userName,item,token);
         break;
       case "鳴子/1組(r)" :
@@ -114,14 +151,30 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = receivedStatusInfo(userId,userName,item,token);
         break;  
-      case "衣装(r)" :
-        var item = "衣装";
+      case "衣装/XS(r)" :
+        var item = "衣装/XS";
+        var data = receivedStatusInfo(userId,userName,item,token);
+        break;
+      case "衣装/S(r)" :
+        var item = "衣装/S";
+        var data = receivedStatusInfo(userId,userName,item,token);
+        break;
+      case "衣装/M(r)" :
+        var item = "衣装/M";
+        var data = receivedStatusInfo(userId,userName,item,token);
+        break;
+      case "衣装/L(r)" :
+        var item = "衣装/L";
+        var data = receivedStatusInfo(userId,userName,item,token);
+        break;
+      case "衣装/XL(r)" :
+        var item = "衣装/XL";
         var data = receivedStatusInfo(userId,userName,item,token);
         break;
       case "申請取消" :
         var data = {
           "replyToken" : token,
-          "messages" : [ret_msg_cancel_application]
+          "messages" : quick_rep_purchase_cancel
         };
         break;
       case "鳴子/1組(ad)" :
@@ -132,8 +185,24 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = cancelPurchaseApplication(userId,userName,item,token);
         break;  
-      case "衣装(ad)" :
-        var item = "衣装";
+      case "衣装/XS(ad)" :
+        var item = "衣装/XS";
+        var data = cancelPurchaseApplication(userId,userName,item,token);
+        break;
+      case "衣装/S(ad)" :
+        var item = "衣装/S";
+        var data = cancelPurchaseApplication(userId,userName,item,token);
+        break;
+      case "衣装/M(ad)" :
+        var item = "衣装/M";
+        var data = cancelPurchaseApplication(userId,userName,item,token);
+        break;
+      case "衣装/L(ad)" :
+        var item = "衣装/L";
+        var data = cancelPurchaseApplication(userId,userName,item,token);
+        break;
+      case "衣装/XL(ad)" :
+        var item = "衣装/XL";
         var data = cancelPurchaseApplication(userId,userName,item,token);
         break;
       case "支払い取消" :
@@ -150,8 +219,24 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = cancelPaymentStatus(userId,userName,item,token);
         break;  
-      case "衣装(pd)" :
-        var item = "衣装";
+      case "衣装/XS(pd)" :
+        var item = "衣装/XS";
+        var data = cancelPaymentStatus(userId,userName,item,token);
+        break;
+      case "衣装/S(pd)" :
+        var item = "衣装/S";
+        var data = cancelPaymentStatus(userId,userName,item,token);
+        break;
+      case "衣装/M(pd)" :
+        var item = "衣装/M";
+        var data = cancelPaymentStatus(userId,userName,item,token);
+        break;
+      case "衣装/L(pd)" :
+        var item = "衣装/L";
+        var data = cancelPaymentStatus(userId,userName,item,token);
+        break;
+      case "衣装/XL(pd)" :
+        var item = "衣装/XL";
         var data = cancelPaymentStatus(userId,userName,item,token);
         break;
       default :
@@ -653,7 +738,279 @@ ret_msg_mv = {
   "altText": "振り動画"
 }
 
-// QuickReplyの実装
+// 購入申請をQuickReplyで実装
+quick_rep_purchase = [{
+  "type": "text",
+  "text": "どれを購入しますか？下のメニューから選択してください。\n\n・鳴子/片方:￥1,250\n・鳴子/1組:￥2,500\n・衣装:￥20,000",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/片方",
+          "text" : "鳴子/片方(a)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/1組",
+          "text" : "鳴子/1組(a)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XS",
+          "text" : "衣装/XS(a)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/S",
+          "text" : "衣装/S(a)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/M",
+          "text" : "衣装/M(a)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/L",
+          "text" : "衣装/L(a)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XL",
+          "text" : "衣装/XL(a)"
+        }
+      }
+    ]
+  }
+}]
+
+// 購入申請取消をQuickReplyで実装
+quick_rep_purchase_cancel = [{
+  "type": "text",
+  "text": "どの物品の購入申請をキャンセルしますか？下のメニューから選択してください。",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/片方",
+          "text" : "鳴子/片方(ad)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/1組",
+          "text" : "鳴子/1組(ad)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XS",
+          "text" : "衣装/XS(ad)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/S",
+          "text" : "衣装/S(ad)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/M",
+          "text" : "衣装/M(ad)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/L",
+          "text" : "衣装/L(ad)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XL",
+          "text" : "衣装/XL(ad)"
+        }
+      }
+    ]
+  }
+}]
+
+// 支払い確認をQuickReplyで実装
+quick_rep_payment = [{
+  "type": "text",
+  "text": "購入申請後、振込を行う場合は以下の口座に振り込んでね!\n■口座\nXXX\n\n振込が完了している場合は、以下のメニューから支払いが完了したものを選択してください。\n各備品の値段が知りたい場合は、以下のメニューから「料金」を選択してください。",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/片方",
+          "text" : "鳴子/片方(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/1組",
+          "text" : "鳴子/1組(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XS",
+          "text" : "衣装/XS(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/S",
+          "text" : "衣装/S(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/M",
+          "text" : "衣装/M(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/L",
+          "text" : "衣装/L(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XL",
+          "text" : "衣装/XL(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "料金",
+          "text" : "料金"
+        }
+      }
+    ]
+  }
+}]
+
+// 物品受け取りをQuickReplyで実装
+quick_rep_receive = [{
+  "type": "text",
+  "text": "物品を受け取ったら、以下のメニューから受け取った備品を選択して受け取り確認を行ってください。",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/片方",
+          "text" : "鳴子/片方(r)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/1組",
+          "text" : "鳴子/1組(r)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XS",
+          "text" : "衣装/XS(r)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/S",
+          "text" : "衣装/S(r)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/M",
+          "text" : "衣装/M(r)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/L",
+          "text" : "衣装/L(r)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XL",
+          "text" : "衣装/XL(r)"
+        }
+      }
+    ]
+  }
+}]
+
+// QuickReplyでメニューの実装
 quick_rep = [{
   "type": "text",
   "text": "知りたい情報をここか下のメニューから探してね。",
@@ -663,24 +1020,32 @@ quick_rep = [{
         "type": "action",
         "action": {
           "type": "message",
-          "label": "購入申請を行いたい！",
-          "text" : "購入申請"
+          "label": "購入申請を取り消したい！",
+          "text" : "申請取消"
         }
       },
       {
         "type": "action",
         "action": {
           "type": "message",
-          "label": "支払い口座や支払い確認を行いたい！",
-          "text" : "支払い関連"
+          "label": "支払い確認を取り消したい！",
+          "text": "支払い取消"
         }
       },
       {
         "type": "action",
         "action": {
           "type": "message",
-          "label": "物品を受け取ったことを報告したい！",
-          "text" : "受け取り確認"
+          "label": "備品などの料金の確認がしたい！",
+          "text" : "料金"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "口座情報が知りたい！",
+          "text" : "振込口座"
         }
       },
       {
