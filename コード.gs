@@ -40,6 +40,9 @@ function doPost(e) {
         break;
       case "料金" :
         var data = returnMessage(token, "・鳴子/片方:￥1,250\n・鳴子/1組:￥2,500\n・衣装:￥20,000");
+        break;
+      case "申請状況確認" :
+        var data = checkApplicationStatus(userId,token);
         break;  
       case "イベント連絡" :
         var data =  {
@@ -62,7 +65,6 @@ function doPost(e) {
       case "購入申請" :
         var data = {
           "replyToken" : token, 
-          //"messages" : [ret_msg_purchase_application]
           "messages" : quick_rep_purchase
         };
         break;
@@ -70,7 +72,6 @@ function doPost(e) {
         var data = {
           "replyToken" : token, 
           "messages" : quick_rep_receive
-          // "messages" : [ret_msg_received_application]
         };
         break;
       case "鳴子/1組(a)" :
@@ -111,7 +112,6 @@ function doPost(e) {
       case "支払い関連" :
         var data = {
           "replyToken" : token, 
-          // "messages" : ret_msg_payment_status
           "messages" : quick_rep_payment
         };
         break;
@@ -208,7 +208,7 @@ function doPost(e) {
       case "支払い取消" :
         var data = {
           "replyToken" : token,
-          "messages" : [ret_msg_cancel_payment]
+          "messages" : quick_rep_cancel_payment
         };
         break;
       case "鳴子/1組(pd)" :
@@ -248,9 +248,9 @@ function doPost(e) {
     }
   }else{
     var data = {
-          "replyToken" : token,
-          "messages" : quick_rep
-        };
+      "replyToken" : token,
+      "messages" : quick_rep
+    };
   };
   
   
@@ -387,6 +387,51 @@ function receivedStatusInfo(userId, userName,item,setToken){
   }
 }
 
+// 申請状況確認
+function checkApplicationStatus(userId, setToken){
+  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1qCla9GOzlP0e2XHqbyWb8N66RdaeU8ClHCuXhcaAC3k");
+  var ss = sheet.getSheets()[0];
+  ss.sort(3,false);
+  var lastRow = ss.getLastRow();
+  var count = lastRow + 1;
+  var data = "";
+  for(var i=1; i<= lastRow+1; i++){
+    if(ss.getRange(i, 1).getValue() == userId){
+      if(ss.getRange(i, 5).getValue() == false && ss.getRange(i, 6).getValue() == false){
+        data += (ss.getRange(i, 4).getValue() + ":支払い待ち\n");
+        count -= 1;
+      }else if(ss.getRange(i, 5).getValue() == true && ss.getRange(i, 6).getValue() == false){
+        data += (ss.getRange(i, 4).getValue() + ":受け取り確認待ち\n");
+        count -= 1;
+      }else{
+        count -= 1;
+      }
+    }else{
+      count -= 1;
+    }
+  }
+  if(data == ""){
+    var reply = {
+      "replyToken" : setToken, 
+      "messages" : [{
+        "type" : "text",
+        "text" : "現在申請中のものはありません。"
+      }]
+    };
+    return reply;
+  }else{
+    var reply = {
+      "replyToken" : setToken, 
+      "messages" : [{
+        "type" : "text",
+        "text" : data + "\n上記で問題がなければ、対応をお願いします！"
+      }]
+    };
+    return reply;
+  }
+}
+
+
 
 // 購入申請キャンセル
 function cancelPurchaseApplication(userId,userName,item,setToken){
@@ -502,162 +547,6 @@ function getUserID(line){
   var response = UrlFetchApp.fetch(url, options);
   var content = JSON.parse(response.getContentText()).userId;
   return content;
-}
-
-
-ret_msg_purchase_application = {
-  "type": "template",
-  "template": {
-    "type" : "carousel",
-    "columns": [
-      {
-        "title": "鳴子/1組を買いたい",
-        "text" : "鳴子/1組 ￥2,500",
-        "actions": [{"type": "message",
-                     "label": "鳴子/1組",
-                     "text": "鳴子/1組(a)"}]
-      },
-      {
-        "title": "鳴子/片方を買いたい",
-        "text" : "鳴子/片方 ￥1,250",
-        "actions": [{"type": "message",
-                     "label": "鳴子/片方",
-                     "text": "鳴子/片方(a)"}]
-      },
-      {
-        "title": "衣装を買いたい",
-        "text" : "衣装 ￥20,000",
-        "actions": [{"type": "message",
-                     "label": "衣装",
-                     "text": "衣装(a)"}]
-      }
-    ]
-  },
-  "altText": "購入申請"
-}
-
-ret_msg_payment_status = [{"type": "text",
-                           "text": "購入申請後、振込を行う場合は以下の口座に振り込んでね!\n■口座\nXXX\n\n振込が完了している場合は、以下のメニューから支払いが完了したものを選択してください。"},{
-                             "type": "template",
-                             "template": {
-                               "type" : "carousel",
-                               "columns": [
-                                 {
-                                   "title": "鳴子/1組の支払い確認",
-                                   "text" : "鳴子/1組",
-                                   "actions": [{"type": "message",
-                                                "label": "鳴子/1組",
-                                                "text": "鳴子/1組(p)"}]
-                                 },
-                                 {
-                                   "title": "鳴子/片方の支払い確認",
-                                   "text" : "鳴子/片方",
-                                   "actions": [{"type": "message",
-                                                "label": "鳴子/片方",
-                                                "text": "鳴子/片方(p)"}]
-                                 },
-                                 {
-                                   "title": "衣装の支払い確認",
-                                   "text" : "衣装",
-                                   "actions": [{"type": "message",
-                                                "label": "衣装",
-                                                "text": "衣装(p)"}]
-                                 }
-                               ]
-                             },
-                             "altText": "支払い確認"
-                           }]
-
-ret_msg_received_application = {
-  "type": "template",
-  "template": {
-    "type" : "carousel",
-    "columns": [
-      {
-        "title": "鳴子/1組を受け取りました",
-        "text" : "鳴子/1組",
-        "actions": [{"type": "message",
-                     "label": "鳴子/1組",
-                     "text": "鳴子/1組(r)"}]
-      },
-      {
-        "title": "鳴子/片方を受け取りました",
-        "text" : "鳴子/片方",
-        "actions": [{"type": "message",
-                     "label": "鳴子/片方",
-                     "text": "鳴子/片方(r)"}]
-      },
-      {
-        "title": "衣装を受け取りました",
-        "text" : "衣装",
-        "actions": [{"type": "message",
-                     "label": "衣装",
-                     "text": "衣装(r)"}]
-      }
-    ]
-  },
-  "altText": "物品受け取り確認"
-}
-
-ret_msg_cancel_application = {
-  "type": "template",
-  "template": {
-    "type" : "carousel",
-    "columns": [
-      {
-        "title": "鳴子/1組の購入申請をキャンセルしたい",
-        "text" : "鳴子/1組",
-        "actions": [{"type": "message",
-                     "label": "鳴子/1組",
-                     "text": "鳴子/1組(ad)"}]
-      },
-      {
-        "title": "鳴子/片方の購入申請をキャンセルしたい",
-        "text" : "鳴子/片方",
-        "actions": [{"type": "message",
-                     "label": "鳴子/片方",
-                     "text": "鳴子/片方(ad)"}]
-      },
-      {
-        "title": "衣装の購入申請をキャンセルしたい",
-        "text" : "衣装",
-        "actions": [{"type": "message",
-                     "label": "衣装",
-                     "text": "衣装(ad)"}]
-      }
-    ]
-  },
-  "altText": "購入申請キャンセル"
-}
-
-ret_msg_cancel_payment = {
-  "type": "template",
-  "template": {
-    "type" : "carousel",
-    "columns": [{
-      "title": "鳴子の支払い確認をキャンセルしたい",
-      "text": "鳴子",
-      "actions": [{"type": "message",
-                   "label": "鳴子/1組",
-                   "text": "鳴子/1組(pd)"},
-                  {"type": "message",
-                   "label": "鳴子/片方",
-                   "text": "鳴子/片方(pd)"},
-                 ]
-                  },
-                  {
-                  "title": "衣装の支払い確認をキャンセルしたい",
-                  "text": "衣装",
-                  "actions": [{"type": "message",
-                  "label": "衣装",
-                  "text": "衣装(pd)"},
-                  {"type": "message",
-                  "label": "衣装",
-                  "text": "衣装(pd)"},
-                 ]
-    }]
-  },
-  "altText": "支払い確認キャンセル"
 }
 
 ret_msg =  {
@@ -944,6 +833,72 @@ quick_rep_payment = [{
   }
 }]
 
+// 支払い確認取消をQuickReplyで実装
+quick_rep_cancel_payment = [{
+  "type": "text",
+  "text": "支払い確認を取り消す場合は、取り消す備品を選択してください。",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/片方",
+          "text" : "鳴子/片方(pd)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/1組",
+          "text" : "鳴子/1組(pd)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XS",
+          "text" : "衣装/XS(pd)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/S",
+          "text" : "衣装/S(pd)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/M",
+          "text" : "衣装/M(pd)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/L",
+          "text" : "衣装/L(pd)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XL",
+          "text" : "衣装/XL(pd)"
+        }
+      }
+    ]
+  }
+}]
+
 // 物品受け取りをQuickReplyで実装
 quick_rep_receive = [{
   "type": "text",
@@ -1013,9 +968,17 @@ quick_rep_receive = [{
 // QuickReplyでメニューの実装
 quick_rep = [{
   "type": "text",
-  "text": "知りたい情報をここか下のメニューから探してね。",
+  "text": "知りたい情報を下のメニューから探してね。",
   "quickReply": {
     "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "申請状況を知りたい！",
+          "text" : "申請状況確認"
+        }
+      },
       {
         "type": "action",
         "action": {
