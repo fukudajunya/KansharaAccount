@@ -38,11 +38,21 @@ function doPost(e) {
       case "振込口座" :
         var data = returnMessage(token, "口座情報\nYYYY\nソン君の口座にお金いっぱい入れてね！");
         break;
+      case "管理コマンド" :
+        var data = {
+          "replyToken" : token, 
+          "messages" : quick_rep_manager
+        };
+        break;
       case "料金" :
         var data = returnMessage(token, "・鳴子/片方:￥1,250\n・鳴子/1組:￥2,500\n・衣装:￥20,000");
         break;
       case "申請状況確認" :
         var data = checkApplicationStatus(userId,token);
+        break;
+      // 管理者用メンバー申請状況確認
+      case "メンバー申請状況" :
+        var data = checkStatusForManager(token);
         break;  
       case "イベント連絡" :
         var data =  {
@@ -431,7 +441,45 @@ function checkApplicationStatus(userId, setToken){
   }
 }
 
-
+// 管理者用メンバー申請状況確認機能
+function checkStatusForManager(setToken){
+  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1qCla9GOzlP0e2XHqbyWb8N66RdaeU8ClHCuXhcaAC3k");
+  var ss = sheet.getSheets()[0];
+  ss.sort(3,false);
+  var lastRow = ss.getLastRow();
+  var count = lastRow + 1;
+  var data = "";
+  for(var i=1; i<= lastRow; i++){
+    if(ss.getRange(i, 5).getValue() == false && ss.getRange(i, 6).getValue() == false){
+      data += ("・" + ss.getRange(i, 2).getValue() + "\n    " + ss.getRange(i, 4).getValue() + ":支払い待ち\n");
+        count -= 1;
+      }else if(ss.getRange(i, 5).getValue() == true && ss.getRange(i, 6).getValue() == false){
+        data += ("・" + ss.getRange(i, 2).getValue() + "\n    " + ss.getRange(i, 4).getValue() + ":受け取り確認待ち\n");
+        count -= 1;
+      }else{
+        count -= 1;
+      }
+  }
+  if(data == ""){
+    var reply = {
+      "replyToken" : setToken, 
+      "messages" : [{
+        "type" : "text",
+        "text" : "現在メンバーによる申請中のものはありません。"
+      }]
+    };
+    return reply;
+  }else{
+    var reply = {
+      "replyToken" : setToken, 
+      "messages" : [{
+        "type" : "text",
+        "text" : data + "\n以上がメンバーによる申請状況です。"
+      }]
+    };
+    return reply;
+  }
+}
 
 // 購入申請キャンセル
 function cancelPurchaseApplication(userId,userName,item,setToken){
@@ -1025,6 +1073,32 @@ quick_rep = [{
           "type": "message",
           "label": "振り動画を見たい！",
           "text": "振り動画"
+        }
+      }
+    ]
+  }
+}]
+
+// 管理者コマンド
+quick_rep_manager = [{
+  "type": "text",
+  "text": "管理者用コマンド",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "メンバーの申請状況確認",
+          "text" : "メンバー申請状況"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "なんか他あれば",
+          "text" : "なんか他あれば"
         }
       }
     ]
