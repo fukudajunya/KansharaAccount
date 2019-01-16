@@ -38,7 +38,7 @@ function doPost(e) {
       case "振込口座" :
         var data = returnMessage(token, "口座情報\nYYYY\nソン君の口座にお金いっぱい入れてね！");
         break;
-      case "管理コマンド" :
+      case "墾田永年私財法2019" :
         var data = {
           "replyToken" : token, 
           "messages" : quick_rep_manager
