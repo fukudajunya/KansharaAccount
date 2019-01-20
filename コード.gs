@@ -32,11 +32,8 @@ function doPost(e) {
   if(type == "text"){
     var text = JSON.parse(json).events[0].message.text;
     switch(text){
-      case "連絡先" :
-        var data = returnMessage(token,"■連絡先\n代表\nXXX");
-        break;
       case "振込口座" :
-        var data = returnMessage(token, "口座情報\nYYYY\nソン君の口座にお金いっぱい入れてね！");
+        var data = returnMessage(token, "金融機関:三菱東京UFJ銀行\n支店名:八尾支店\n口座種別:普通\n口座番号:0199344\n口座名義:カンシャラ コウヅミナト");
         break;
       case "墾田永年私財法2019" :
         var data = {
