@@ -13,7 +13,7 @@ function paymentStatusInfo(userId, userName,item,setToken){
         "replyToken" : setToken, 
         "messages" : [{
           "type" : "text",
-          "text" : item + "の支払いはすでに完了しています。"
+          "text" : "申請に失敗しました。\nメニューの[その他(申請取消など)] → [申請状況を知りたい!]から状況を確認してください。\n\n以下の場合は申請に失敗します。\n・既に同じものを購入申請しているとき。\n・支払い済みのものについて支払い申請をしたとき。\n・支払い未確認で物品受け取り申請をしたとき。"
         }]
       };
       return data;
@@ -33,7 +33,7 @@ function paymentStatusInfo(userId, userName,item,setToken){
         "replyToken" : setToken, 
         "messages" : [{
           "type" : "text",
-          "text" : item + "の購入申請がされていません。購入申請から申請をお願いします。"
+          "text" : "申請に失敗しました。\nメニューの[その他(申請取消など)] → [申請状況を知りたい!]から状況を確認してください。\n\n以下の場合は申請に失敗します。\n・既に同じものを購入申請しているとき。\n・支払い済みのものについて支払い申請をしたとき。\n・支払い未確認で物品受け取り申請をしたとき。"
         }]
       };
       return data;

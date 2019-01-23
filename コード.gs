@@ -58,10 +58,10 @@ function doPost(e) {
         };
         break;
       case "キャンセル連絡" :
-        var data =returnMessage(token, "この人に連絡してね。\n\n■まりな\nYYYY");
+        var data =returnMessage(token, "キャンセルに関しての問い合わせはこの人に連絡してね。\n\n■まりな\nYYYY\n\nまた、サークルスクエアも不参加への更新をお願いします。\nhttps://www.c-sqr.net/cs75424/News.html");
         break;
       case "サークルスクエア":
-        var data = returnMessage(token, "https://www.c-sqr.net/cs75424/News.html");
+        var data = returnMessage(token, "イベント参加はサークルスクエアより参加表明をお願いします。\n\nhttps://www.c-sqr.net/cs75424/News.html");
         break;
       case "振り動画" :
         var data =  {
