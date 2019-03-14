@@ -51,26 +51,26 @@ ret_msg_mv = {
   "template": {
     "type" : "carousel",
     "columns": [{
-      "title": "解説動画1",
-      "text": "①から②まで",
+      "title": "こねこね説明動画",
+      "text": "3:55~Last",
       "actions": [{"type": "uri",
-                   "label": "振り動画1(0:00 - 0:30)",
-                   "uri": "https://www.youtube.com/watch?v=ABtP-9WyRxQ&feature=youtu.be"},
-                  {"type": "uri",
-                   "label": "振り動画2(0:30 - 1:00)",
-                   "uri": "https://www.youtube.com/watch?v=XOSLKT8JXmY&feature=youtu.be"},
+                   "label": "こねこね説明動画",
+                   "uri": "https://youtu.be/e5LHOA-AGL4"},
+//                  {"type": "uri",
+//                   "label": "振り動画2(0:30 - 1:00)",
+//                   "uri": "https://www.youtube.com/watch?v=XOSLKT8JXmY&feature=youtu.be"},
                  ]
-                  },
-                  {
-                  "title": "解説動画2",
-                  "text": "③から④まで",
-                  "actions": [{"type": "uri",
-                  "label": "振り動画3(1:00 - 1:30)",
-                  "uri": "https://www.youtube.com/watch?v=yVqfh0IrrRQ&feature=youtu.be"},
-                  {"type": "uri",
-                  "label": "振り動画4(1:30 - 2:00)",
-                  "uri": "https://www.youtube.com/watch?v=s11F2xVm_94&feature=youtu.be"},
-                 ]
+//                  },
+//                  {
+//                  "title": "解説動画2",
+//                  "text": "③から④まで",
+//                  "actions": [{"type": "uri",
+//                  "label": "振り動画3(1:00 - 1:30)",
+//                  "uri": "https://www.youtube.com/watch?v=yVqfh0IrrRQ&feature=youtu.be"},
+//                  {"type": "uri",
+//                  "label": "振り動画4(1:30 - 2:00)",
+//                  "uri": "https://www.youtube.com/watch?v=s11F2xVm_94&feature=youtu.be"},
+//                 ]
     }]
   },
   "altText": "振り動画"
@@ -498,8 +498,140 @@ quick_rep_manager = [{
         "type": "action",
         "action": {
           "type": "message",
+          "label": "備品管理",
+          "text" : "備品管理"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
           "label": "なんか他あれば",
           "text" : "なんか他あれば"
+        }
+      }
+    ]
+  }
+}]
+
+//備品管理コマンド
+quick_manage_item = [{
+  "type": "text",
+  "text": "備品管理コマンド",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "踊り子へ渡した(大阪)",
+          "text" : "大阪で手渡し"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "踊り子へ渡した(東京)",
+          "text" : "東京で手渡し"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "在庫補充",
+          "text" : "在庫補充"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "東京へ送付",
+          "text" : "東京へ送付"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "取消(在庫補充)",
+          "text" : "取消(在庫補充)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "取消(東京へ送付)",
+          "text" : "取消(東京へ送付)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "在庫確認",
+          "text" : "在庫確認"
+        }
+      }
+    ]
+  }
+}]
+
+// 備品名の表示
+quick_rep_manage_item = [{
+  "type": "text",
+  "text": "どの備品が対象ですか？",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "鳴子/1組",
+          "text" : "鳴子/1組"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XS",
+          "text" : "衣装/XS"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/S",
+          "text" : "衣装/S"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/M",
+          "text" : "衣装/M"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/L",
+          "text" : "衣装/L"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装/XL",
+          "text" : "衣装/XL"
         }
       }
     ]

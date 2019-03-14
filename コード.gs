@@ -41,6 +41,30 @@ function doPost(e) {
           "messages" : quick_rep_manager
         };
         break;
+      // 備品管理コマンドの追加
+      case "備品管理" :
+        var data = {
+          "replyToken" : token, 
+          "messages" : quick_manage_item
+        };
+        break; 
+      // 以下、備品管理に関係するコマンド
+      case "大阪で手渡し" :
+      case "東京で手渡し" :
+      case "在庫補充" :
+        var data = {
+          "replyToken" : token,
+          "messages" : quick_rep_manage_item
+        }
+        // var json2 = data2.postData.getDataAsString();
+        // var itemName = JSON.parse(json2).events[0].message.text;
+        // var data = returnMessage(token, itemName);
+        break;
+      case "東京へ送付" :
+      case "取消(在庫補充)" :
+      case "取消(東京へ送付)" :
+      case "在庫確認" :
+      // ここまで
       case "料金" :
         var data = returnMessage(token, "・鳴子/片方:￥1,250\n・鳴子/1組:￥2,500\n・衣装:￥20,000");
         break;
