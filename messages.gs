@@ -1,3 +1,26 @@
+//持ち物確認用Carousel
+ret_check = {
+  "type": "template",
+  "template": {
+    "type" : "carousel",
+    "columns": [
+      {
+        "text": "[衣装]\n・法被\n・グレーのインナー\n・グレーズボン\n・帯\n・垂らす布",
+        "actions": [{"type": "message",
+                     "label": "準備OK",
+                     "text": "行ってきます!"}]
+      },
+      {
+        "text": "[各自準備]\n・黒足袋\n・鳴子(or提灯or纏)\n・貴重品袋\n・黒レギンス\n・黒タンクトップ\n・安全ピン5~6本\n・着替え",
+        "actions": [{"type": "message",
+                     "label": "準備OK",
+                     "text": "行ってきます!"}]
+      }
+    ]
+  },
+  "altText": "持ち物チェック"
+}
+
 ret_msg =  {
   "type": "template",
   "template": {
@@ -28,6 +51,13 @@ ret_msg_inst = {
     "type" : "carousel",
     "columns": [
       {
+        "title": "担当者に質問がしたい",
+        "text": "教えて担当さん",
+        "actions": [{"type": "message",
+                     "label": "担当はだれ？",
+                     "text": "教えて担当さん"}]
+      },
+      {
         "title": "イベントに参加したい",
         "text": "イベント参加申請",
         "actions": [{"type": "message",
@@ -51,37 +81,116 @@ ret_msg_mv = {
   "template": {
     "type" : "carousel",
     "columns": [{
-      "title": "こねこね説明動画",
-      "text": "3:55~Last",
-      "actions": [{"type": "uri",
-                   "label": "こねこね説明動画",
-                   "uri": "https://youtu.be/e5LHOA-AGL4"},
-//                  {"type": "uri",
-//                   "label": "振り動画2(0:30 - 1:00)",
-//                   "uri": "https://www.youtube.com/watch?v=XOSLKT8JXmY&feature=youtu.be"},
+                 "title": "Alegría振り動画",
+                 "text": "それぞれ有効に使ってね",
+                 "actions": 
+                        [{"type": "uri",
+                          "label": "かんしゃらで踊るにあたって",
+                          "uri": "https://youtu.be/8sAWJGsyLHg"},
+                         {"type": "uri",
+                          "label": "曲通し",
+                          "uri": "https://youtu.be/HXVOWUdn3_M"},
+                         {"type": "uri",
+                          "label": "センター取り説明",
+                          "uri": "https://youtu.be/JzjrUgptofg"},
+                        ]
+                  },
+                 {
+                  "title": "解説動画①",
+                  "text": "振りの細かい解説をしてるよ",
+                  "actions": 
+                         [{"type": "uri",
+                           "label": "冒頭",
+                           "uri": "https://youtu.be/pUoVnCmtxvY"},
+                          {"type": "uri",
+                           "label": "つけまつける～歌前",
+                           "uri": "https://youtu.be/qZYM3_FKTlc"},
+                          {"type": "uri",
+                           "label": "灰色の空に～泣いただろう",
+                           "uri": "https://youtu.be/_DTy7G5cWjg"},
                  ]
-//                  },
-//                  {
-//                  "title": "解説動画2",
-//                  "text": "③から④まで",
-//                  "actions": [{"type": "uri",
-//                  "label": "振り動画3(1:00 - 1:30)",
-//                  "uri": "https://www.youtube.com/watch?v=yVqfh0IrrRQ&feature=youtu.be"},
-//                  {"type": "uri",
-//                  "label": "振り動画4(1:30 - 2:00)",
-//                  "uri": "https://www.youtube.com/watch?v=s11F2xVm_94&feature=youtu.be"},
-//                 ]
-    }]
+                 },
+                 {
+                  "title": "解説動画②",
+                  "text": "全部見てね",
+                  "actions": 
+                　　　　　[{"type": "uri",
+                  　　　　　"label": "少しだけ～自由の翼広げ",
+                  　　　　　"uri": "https://youtu.be/u17V2K1_E5g"},
+                  　　　　{"type": "uri",
+                  　　　　 "label": "Alegría～明日へと続く道",
+                          "uri": "https://youtu.be/Le159RmkbGI"},
+                         {"type": "uri",
+                          "label": "センターかち割り",
+                          "uri": "https://youtu.be/LkrSe7NMSlg"},
+                 ]
+    　　　　　　　　},
+                 {
+                  "title": "解説動画③",
+                  "text": "忘れた頃に、また見てね",
+                  "actions": 
+                　　　　　[{"type": "uri",
+                  　　　　　"label": "穿たれた～腕4回くるくる",
+                  　　　　　"uri": "https://youtu.be/cT0XDZIl6Zw"},
+                  　　　　{"type": "uri",
+                  　　　　 "label": "新しい～よさこい節前",
+                          "uri": "https://youtu.be/NvFQcoYn15I"},
+                         {"type": "uri",
+                          "label": "よさこい節",
+                          "uri": "https://youtu.be/yqDsBhkZGw4"},
+                 ]
+    　　　　　　　　},
+                 {
+                  "title": "解説動画④&パレード振り",
+                  "text": "こねこねは頑張って覚えてね",
+                  "actions": 
+                　　　　　[{"type": "uri",
+                  　　　　　"label": "こねこね",
+                  　　　　　"uri": "https://youtu.be/t6WmdNOyiO0"},
+                  　　　　{"type": "uri",
+                  　　　　 "label": "右腕ドリル～最後",
+                          "uri": "https://youtu.be/jZX8dSpLqLc"},
+                         {"type": "uri",
+                          "label": "パレード振り説明",
+                          "uri": "https://youtu.be/hDwJfXeIICE"},
+                 ]
+    　　　　　　　　}
+               ]
   },
   "altText": "振り動画"
 }
 
+
 // 購入申請をQuickReplyで実装
 quick_rep_purchase = [{
   "type": "text",
-  "text": "どれを購入しますか？下のメニューから選択してください。\n\n・鳴子/片方:￥1,250\n・鳴子/1組:￥2,500\n・衣装:￥20,000",
+  "text": "どれを購入しますか？下のメニューから選択してください。\n\n・ゑ祭り参加費:￥3,000\n・Tシャツ:￥2,000（Tシャツ2枚セット：￥3,800）\n・鳴子/片方:￥1,300\n・鳴子/1組:￥2,500\n・衣装:￥22,000",
   "quickReply": {
     "items": [
+     {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "ゑ祭り参加費",
+          "text" : "ゑ祭り参加費(a)"
+        }
+      },
+     {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "Tシャツ",
+          "text" : "Tシャツ(a)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "Tシャツ2枚",
+          "text" : "Tシャツ2枚(a)"
+        }
+      },
       {
         "type": "action",
         "action": {
@@ -96,14 +205,6 @@ quick_rep_purchase = [{
           "type": "message",
           "label": "鳴子/1組",
           "text" : "鳴子/1組(a)"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "衣装/XS",
-          "text" : "衣装/XS(a)"
         }
       },
       {
@@ -134,8 +235,8 @@ quick_rep_purchase = [{
         "type": "action",
         "action": {
           "type": "message",
-          "label": "衣装/XL",
-          "text" : "衣装/XL(a)"
+          "label": "衣装/LL",
+          "text" : "衣装/LL(a)"
         }
       }
     ]
@@ -152,6 +253,30 @@ quick_rep_purchase_cancel = [{
         "type": "action",
         "action": {
           "type": "message",
+          "label": "ゑ祭り参加費",
+          "text" : "ゑ祭り参加費(ad)"
+        }
+      },
+     {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "Tシャツ",
+          "text" : "Tシャツ(ad)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "Tシャツ2枚",
+          "text" : "Tシャツ2枚(ad)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
           "label": "鳴子/片方",
           "text" : "鳴子/片方(ad)"
         }
@@ -162,14 +287,6 @@ quick_rep_purchase_cancel = [{
           "type": "message",
           "label": "鳴子/1組",
           "text" : "鳴子/1組(ad)"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "衣装/XS",
-          "text" : "衣装/XS(ad)"
         }
       },
       {
@@ -200,8 +317,8 @@ quick_rep_purchase_cancel = [{
         "type": "action",
         "action": {
           "type": "message",
-          "label": "衣装/XL",
-          "text" : "衣装/XL(ad)"
+          "label": "衣装/LL",
+          "text" : "衣装/LL(ad)"
         }
       }
     ]
@@ -218,6 +335,30 @@ quick_rep_payment = [{
         "type": "action",
         "action": {
           "type": "message",
+          "label": "ゑ祭り参加費",
+          "text" : "ゑ祭り参加費(p)"
+        }
+      },
+     {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "Tシャツ",
+          "text" : "Tシャツ(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "Tシャツ2枚",
+          "text" : "Tシャツ2枚(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
           "label": "鳴子/片方",
           "text" : "鳴子/片方(p)"
         }
@@ -228,14 +369,6 @@ quick_rep_payment = [{
           "type": "message",
           "label": "鳴子/1組",
           "text" : "鳴子/1組(p)"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "衣装/XS",
-          "text" : "衣装/XS(p)"
         }
       },
       {
@@ -266,8 +399,8 @@ quick_rep_payment = [{
         "type": "action",
         "action": {
           "type": "message",
-          "label": "衣装/XL",
-          "text" : "衣装/XL(p)"
+          "label": "衣装/LL",
+          "text" : "衣装/LL(p)"
         }
       },
       {
@@ -292,6 +425,30 @@ quick_rep_cancel_payment = [{
         "type": "action",
         "action": {
           "type": "message",
+          "label": "ゑ祭り参加費",
+          "text" : "ゑ祭り参加費(pd)"
+        }
+      },
+     {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "Tシャツ",
+          "text" : "Tシャツ(pd)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "Tシャツ2枚",
+          "text" : "Tシャツ2枚(pd)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
           "label": "鳴子/片方",
           "text" : "鳴子/片方(pd)"
         }
@@ -302,14 +459,6 @@ quick_rep_cancel_payment = [{
           "type": "message",
           "label": "鳴子/1組",
           "text" : "鳴子/1組(pd)"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "衣装/XS",
-          "text" : "衣装/XS(pd)"
         }
       },
       {
@@ -340,8 +489,8 @@ quick_rep_cancel_payment = [{
         "type": "action",
         "action": {
           "type": "message",
-          "label": "衣装/XL",
-          "text" : "衣装/XL(pd)"
+          "label": "衣装/LL",
+          "text" : "衣装/LL(pd)"
         }
       }
     ]
@@ -358,6 +507,30 @@ quick_rep_receive = [{
         "type": "action",
         "action": {
           "type": "message",
+          "label": "ゑ祭り参加費",
+          "text" : "ゑ祭り参加費(r)"
+        }
+      },
+     {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "Tシャツ",
+          "text" : "Tシャツ(r)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "Tシャツ2枚",
+          "text" : "Tシャツ2枚(r)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
           "label": "鳴子/片方",
           "text" : "鳴子/片方(r)"
         }
@@ -368,14 +541,6 @@ quick_rep_receive = [{
           "type": "message",
           "label": "鳴子/1組",
           "text" : "鳴子/1組(r)"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "衣装/XS",
-          "text" : "衣装/XS(r)"
         }
       },
       {
@@ -406,8 +571,8 @@ quick_rep_receive = [{
         "type": "action",
         "action": {
           "type": "message",
-          "label": "衣装/XL",
-          "text" : "衣装/XL(r)"
+          "label": "衣装/LL",
+          "text" : "衣装/LL(r)"
         }
       }
     ]
@@ -417,9 +582,17 @@ quick_rep_receive = [{
 // QuickReplyでメニューの実装
 quick_rep = [{
   "type": "text",
-  "text": "知りたい情報を下のメニューから探してね。",
+  "text": "知りたい情報を下のメニューからスクロールして探してね。\n\n・衣装の着方について\n・申請状況確認\n・購入申請の取消\n・支払い確認の取消\n・備品などの料金確認\n・祭りの持ち物確認\n・振込先の確認\n・イベントについて確認\n・振り動画",
   "quickReply": {
     "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "衣装の着方を知りたい！",
+          "text": "衣装の着方を教えて！"
+        }
+      },
       {
         "type": "action",
         "action": {
@@ -450,6 +623,14 @@ quick_rep = [{
           "type": "message",
           "label": "備品などの料金の確認がしたい！",
           "text" : "料金"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "祭りの持ち物確認",
+          "text" : "持ち物チェック"
         }
       },
       {
@@ -498,140 +679,8 @@ quick_rep_manager = [{
         "type": "action",
         "action": {
           "type": "message",
-          "label": "備品管理",
-          "text" : "備品管理"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
           "label": "なんか他あれば",
           "text" : "なんか他あれば"
-        }
-      }
-    ]
-  }
-}]
-
-//備品管理コマンド
-quick_manage_item = [{
-  "type": "text",
-  "text": "備品管理コマンド",
-  "quickReply": {
-    "items": [
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "踊り子へ渡した(大阪)",
-          "text" : "大阪で手渡し"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "踊り子へ渡した(東京)",
-          "text" : "東京で手渡し"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "在庫補充",
-          "text" : "在庫補充"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "東京へ送付",
-          "text" : "東京へ送付"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "取消(在庫補充)",
-          "text" : "取消(在庫補充)"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "取消(東京へ送付)",
-          "text" : "取消(東京へ送付)"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "在庫確認",
-          "text" : "在庫確認"
-        }
-      }
-    ]
-  }
-}]
-
-// 備品名の表示
-quick_rep_manage_item = [{
-  "type": "text",
-  "text": "どの備品が対象ですか？",
-  "quickReply": {
-    "items": [
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "鳴子/1組",
-          "text" : "鳴子/1組"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "衣装/XS",
-          "text" : "衣装/XS"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "衣装/S",
-          "text" : "衣装/S"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "衣装/M",
-          "text" : "衣装/M"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "衣装/L",
-          "text" : "衣装/L"
-        }
-      },
-      {
-        "type": "action",
-        "action": {
-          "type": "message",
-          "label": "衣装/XL",
-          "text" : "衣装/XL"
         }
       }
     ]

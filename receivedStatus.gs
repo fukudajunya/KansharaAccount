@@ -1,6 +1,6 @@
 // 物品受け取り情報を記録する
 function receivedStatusInfo(userId, userName,item,setToken){
-  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1qCla9GOzlP0e2XHqbyWb8N66RdaeU8ClHCuXhcaAC3k");
+  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1LD89XWQ3mTVVbLp2-TzIfzyfVtepwF9e36y7zxug6iQ");
   var ss = sheet.getSheets()[0];
   ss.sort(3,false);
   var lastRow = ss.getLastRow();
