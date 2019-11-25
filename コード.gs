@@ -3,6 +3,15 @@ var secret_token = "DIc4nUB883QVOrxbKlYr/tdnaJY/uFUZuNCyw59ETsUsGlUyQ8xVIpLc8F23
 var secret = "Bearer " + secret_token;
 
 function doPost(e) {
+  var events = JSON.parse(e.postData.contents).events;
+  events.forEach(function(event){
+    if(event.type == "follow"){
+      follow(event);
+    }else if (event.type == "unfollow"){
+      unfollow(event);
+    }
+  });
+  
   var line = JSON.parse(e.postData.contents).events[0];
   var json = e.postData.getDataAsString();
   
