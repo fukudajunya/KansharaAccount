@@ -50,7 +50,7 @@ function doPost(e) {
         };
         break;
       case "料金" : 
-        var data = returnMessage(token, "・ゑ祭り参加費:￥3,000\n・Tシャツ:￥2,000（Tシャツ2枚セット：￥3,800）\n・鳴子/片方:￥1,300\n・鳴子/1組:￥2,500\n・衣装:￥22,000");
+        var data = returnMessage(token, "・鳴子/片方:￥1,300\n・鳴子/1組:￥2,500\n・衣装:￥22,000");
         break;
       case "申請状況確認" :
         var data = checkApplicationStatus(userId,token);
@@ -80,16 +80,19 @@ function doPost(e) {
       case "教えて担当さん":
         var data = returnMessage(token, "★ゑまつりの担当は以下の2人です！相談はお二人へ！\n■祭り担当:みなと\nhttps://line.me/ti/p/QFNJY_V7VK\n■インスト担当:たらこ\nhttps://line.me/ti/p/umUggC9ucM\n\n");
         break;
+      /*
       case "衣装の着方を教えて！":
         var data = returnMessage(token, "https://youtu.be/WV-yEM0DHhY");
-        break;  
+        break;
+      */
       case "振り動画" :
-        // var data = returnMessage(token, "振り動画は制作中です！しばらく待ってね。");
+        var data = returnMessage(token, "振り動画は制作中です！しばらく待ってね。");
+        /*
         var data =  {
         "replyToken" : token, 
         "messages" : [ret_msg_mv]
         };
-        
+        */  
         break;
       case "持ち物チェック" :
         var data =  {
@@ -103,7 +106,8 @@ function doPost(e) {
           "messages" : quick_rep_purchase
         };
         break;
-      case "受け取り確認" :
+      //イベント参加申請
+      case "イベント参加申請" :
         var data = {
           "replyToken" : token, 
           "messages" : quick_rep_receive
@@ -121,21 +125,6 @@ function doPost(e) {
       case "最高に":
         var data = returnMessage(token, "「ハイ！」ってやつだアアアアアアハハハハハハハハハハーッ");
         break;
-      case "ゑ祭り参加費(a)" :
-        var item = "ゑ祭り参加費";
-        var price = 3000;
-        var data = purchaseApplicationInfo(userId,userName,item,price,token);
-        break;    
-      case "Tシャツ(a)" :
-        var item = "Tシャツ";
-        var price = 2000;
-        var data = purchaseApplicationInfo(userId,userName,item,price,token);
-        break;
-      case "Tシャツ2枚(a)" :
-        var item = "Tシャツ2枚";
-        var price = 3800;
-        var data = purchaseApplicationInfo(userId,userName,item,price,token);
-        break;
       case "鳴子/1組(a)" :
         var item = "鳴子/1組";
         var price = 2500;
@@ -146,23 +135,8 @@ function doPost(e) {
         var price = 1250;
         var data = purchaseApplicationInfo(userId,userName,item,price,token);
         break;  
-      case "衣装/S(a)" :
-        var item = "衣装/S";
-        var price = 22000;
-        var data = purchaseApplicationInfo(userId,userName,item,price,token);
-        break;
-      case "衣装/M(a)" :
-        var item = "衣装/M";
-        var price = 22000;
-        var data = purchaseApplicationInfo(userId,userName,item,price,token);
-        break;
-      case "衣装/L(a)" :
-        var item = "衣装/L";
-        var price = 22000;
-        var data = purchaseApplicationInfo(userId,userName,item,price,token);
-        break;
-      case "衣装/LL(a)" :
-        var item = "衣装/LL";
+      case "衣装" :
+        var item = "衣装";
         var price = 22000;
         var data = purchaseApplicationInfo(userId,userName,item,price,token);
         break;  
@@ -172,19 +146,7 @@ function doPost(e) {
           "messages" : quick_rep_payment
         };
         break;
-　　　 case "ゑ祭り参加費(p)" :
-        var item = "ゑ祭り参加費";
-        var data = paymentStatusInfo(userId,userName,item,token);
-        break;  
-      case "Tシャツ(p)" :
-        var item = "Tシャツ";
-        var data = paymentStatusInfo(userId,userName,item,token);
-        break;
-      case "Tシャツ2枚(p)" :
-        var item = "Tシャツ2枚";
-        var data = paymentStatusInfo(userId,userName,item,token);
-        break;
-      case "鳴子/1組(p)" :
+　　　 case "鳴子/1組(p)" :
         var item = "鳴子/1組";
         var data = paymentStatusInfo(userId,userName,item,token);
         break;
@@ -192,33 +154,9 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = paymentStatusInfo(userId,userName,item,token);
         break;  
-      case "衣装/S(p)" :
-        var item = "衣装/S";
+      case "衣装" :
+        var item = "衣装";
         var data = paymentStatusInfo(userId,userName,item,token);
-        break;
-      case "衣装/M(p)" :
-        var item = "衣装/M";
-        var data = paymentStatusInfo(userId,userName,item,token);
-        break;
-      case "衣装/L(p)" :
-        var item = "衣装/L";
-        var data = paymentStatusInfo(userId,userName,item,token);
-        break;
-      case "衣装/LL(p)" :
-        var item = "衣装/LL";
-        var data = paymentStatusInfo(userId,userName,item,token);
-        break;
-      case "ゑ祭り参加費(r)" :
-        var item = "ゑ祭り参加費";
-        var data = receivedStatusInfo(userId,userName,item,token);
-        break;  
-      case "Tシャツ(r)" :
-        var item = "Tシャツ";
-        var data = receivedStatusInfo(userId,userName,item,price,token);
-        break;
-      case "Tシャツ2枚(r)" :
-        var item = "Tシャツ2枚";
-        var data = receivedStatusInfo(userId,userName,item,price,token);
         break;
       case "鳴子/1組(r)" :
         var item = "鳴子/1組";
@@ -228,20 +166,8 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = receivedStatusInfo(userId,userName,item,token);
         break;  
-      case "衣装/S(r)" :
-        var item = "衣装/S";
-        var data = receivedStatusInfo(userId,userName,item,token);
-        break;
-      case "衣装/M(r)" :
-        var item = "衣装/M";
-        var data = receivedStatusInfo(userId,userName,item,token);
-        break;
-      case "衣装/L(r)" :
-        var item = "衣装/L";
-        var data = receivedStatusInfo(userId,userName,item,token);
-        break;
-      case "衣装/LL(r)" :
-        var item = "衣装/LL";
+      case "衣装" :
+        var item = "衣装";
         var data = receivedStatusInfo(userId,userName,item,token);
         break;
       case "申請取消" :
@@ -249,18 +175,6 @@ function doPost(e) {
           "replyToken" : token,
           "messages" : quick_rep_purchase_cancel
         };
-        break;
-      case "ゑ祭り参加費(ad)" :
-        var item = "ゑ祭り参加費";
-        var data = cancelPurchaseApplication(userId,userName,item,token);
-        break;
-      case "Tシャツ(ad)" :
-        var item = "Tシャツ";
-        var data = cancelPurchaseApplication(userId,userName,item,token);
-        break;
-      case "Tシャツ2枚(ad)" :
-        var item = "Tシャツ2枚";
-        var data = cancelPurchaseApplication(userId,userName,item,token);
         break;
       case "鳴子/1組(ad)" :
         var item = "鳴子/1組";
@@ -270,20 +184,8 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = cancelPurchaseApplication(userId,userName,item,token);
         break;  
-      case "衣装/S(ad)" :
-        var item = "衣装/S";
-        var data = cancelPurchaseApplication(userId,userName,item,token);
-        break;
-      case "衣装/M(ad)" :
-        var item = "衣装/M";
-        var data = cancelPurchaseApplication(userId,userName,item,token);
-        break;
-      case "衣装/L(ad)" :
-        var item = "衣装/L";
-        var data = cancelPurchaseApplication(userId,userName,item,token);
-        break;
-      case "衣装/LL(ad)" :
-        var item = "衣装/LL";
+      case "衣装" :
+        var item = "衣装";
         var data = cancelPurchaseApplication(userId,userName,item,token);
         break;
       case "支払い取消" :
@@ -291,18 +193,6 @@ function doPost(e) {
           "replyToken" : token,
           "messages" : quick_rep_cancel_payment
         };
-        break;
-      case "ゑ祭り参加費(pd)" :
-        var item = "ゑ祭り参加費";
-        var data = cancelPaymentStatus(userId,userName,item,token);
-        break;    
-      case "Tシャツ(pd)" :
-        var item = "Tシャツ";
-        var data = cancelPaymentStatus(userId,userName,item,token);
-        break;
-      case "Tシャツ2枚(pd)" :
-        var item = "Tシャツ2枚";
-        var data = cancelPaymentStatus(userId,userName,item,token);
         break;
       case "鳴子/1組(pd)" :
         var item = "鳴子/1組";
@@ -312,20 +202,8 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = cancelPaymentStatus(userId,userName,item,token);
         break;  
-      case "衣装/S(pd)" :
-        var item = "衣装/S";
-        var data = cancelPaymentStatus(userId,userName,item,token);
-        break;
-      case "衣装/M(pd)" :
-        var item = "衣装/M";
-        var data = cancelPaymentStatus(userId,userName,item,token);
-        break;
-      case "衣装/L(pd)" :
-        var item = "衣装/L";
-        var data = cancelPaymentStatus(userId,userName,item,token);
-        break;
-      case "衣装/LL(pd)" :
-        var item = "衣装/LL";
+      case "衣装" :
+        var item = "衣装";
         var data = cancelPaymentStatus(userId,userName,item,token);
         break;
       default :
