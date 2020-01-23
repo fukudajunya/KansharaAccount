@@ -1,6 +1,13 @@
 // 申請状況確認
+// [Memo]
+// SpreadSheetのURL（備忘録）
+// https://docs.google.com/spreadsheets/d/1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w/edit#gid=0
+// 物品/イベント購入管理シートのフォーマット
+// getRange(i,1) ||getRange(i,2) ||getRange(i,3) ||getRange(i,4)  ||getRange(i,5) ||getRange(i,6) 
+// [userId]      ||[userName]    ||[item]        ||[price]        ||[date]        ||[PaymentFlg]
 function checkApplicationStatus(userId, setToken){
-  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1qCla9GOzlP0e2XHqbyWb8N66RdaeU8ClHCuXhcaAC3k");
+  // 物品/イベント購入管理シートの設定
+  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
   var ss = sheet.getSheets()[0];
   ss.sort(3,false);
   var lastRow = ss.getLastRow();
@@ -8,12 +15,12 @@ function checkApplicationStatus(userId, setToken){
   var data = "";
   for(var i=1; i<= lastRow+1; i++){
     if(ss.getRange(i, 1).getValue() == userId){
-      if(ss.getRange(i, 5).getValue() == false && ss.getRange(i, 6).getValue() == false){
-        data += (ss.getRange(i, 4).getValue() + ":支払い待ち\n");
+      if(ss.getRange(i, 6).getValue() == false){
+        data += (ss.getRange(i, 3).getValue() + ":支払い待ち\n");
         count -= 1;
-      }else if(ss.getRange(i, 5).getValue() == true && ss.getRange(i, 6).getValue() == false){
-        data += (ss.getRange(i, 4).getValue() + ":受け取り確認待ち\n");
-        count -= 1;
+      //}else if(ss.getRange(i, 5).getValue() == true && ss2.getRange(i, 4).getValue() == false){
+      //  data += (ss.getRange(i, 3).getValue() + ":受け取り確認待ち\n");
+      //  count -= 1;
       }else{
         count -= 1;
       }

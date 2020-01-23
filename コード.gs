@@ -50,7 +50,7 @@ function doPost(e) {
         };
         break;
       case "料金" : 
-        var data = returnMessage(token, "・鳴子/片方:￥1,300\n・鳴子/1組:￥2,500\n・衣装:￥22,000");
+        var data = returnMessage(token, "・鳴子/片方:￥1,300\n・鳴子/1組:￥2,500\n・衣装:￥22,000・さくよさ：￥1,000\n・能登よさこい：￥20,000");
         break;
       case "申請状況確認" :
         var data = checkApplicationStatus(userId,token);
@@ -135,11 +135,22 @@ function doPost(e) {
         var price = 1250;
         var data = purchaseApplicationInfo(userId,userName,item,price,token);
         break;  
-      case "衣装" :
+      case "衣装(a)" :
         var item = "衣装";
         var price = 22000;
         var data = purchaseApplicationInfo(userId,userName,item,price,token);
         break;  
+      //イベント参加申請用
+      case "さくよさ(a)" :
+        var item = "さくよさ";
+        var price = 1000;
+        var data = eventApplicationInfo(userId,userName,item,price,token)
+        break;
+      case "能登よさこい(a)" :
+        var item = "能登よさこい";
+        var price = 20000;
+        var data = eventApplicationInfo(userId,userName,item,price,token)
+        break;   
       case "支払い関連" :
         var data = {
           "replyToken" : token, 
@@ -154,8 +165,16 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = paymentStatusInfo(userId,userName,item,token);
         break;  
-      case "衣装" :
+      case "衣装(p)" :
         var item = "衣装";
+        var data = paymentStatusInfo(userId,userName,item,token);
+        break;
+      case "さくよさ(p)":
+        var item = "さくよさ";
+        var data = paymentStatusInfo(userId,userName,item,token);
+        break;
+      case "能登よさこい(p)":
+        var item = "能登よさこい";
         var data = paymentStatusInfo(userId,userName,item,token);
         break;
       case "鳴子/1組(r)" :
@@ -166,7 +185,7 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = receivedStatusInfo(userId,userName,item,token);
         break;  
-      case "衣装" :
+      case "衣装(r)" :
         var item = "衣装";
         var data = receivedStatusInfo(userId,userName,item,token);
         break;
@@ -184,10 +203,18 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = cancelPurchaseApplication(userId,userName,item,token);
         break;  
-      case "衣装" :
+      case "衣装(ad)" :
         var item = "衣装";
         var data = cancelPurchaseApplication(userId,userName,item,token);
         break;
+      case "さくよさ(ad)" :
+        var item = "さくよさ";
+        var data = cancelPurchaseApplication(userId,userName,item,token);
+        break;
+      case "能登よさこい(ad)" :
+        var item = "能登よさこい";
+        var data = cancelPurchaseApplication(userId,userName,item,token);
+        break;   
       case "支払い取消" :
         var data = {
           "replyToken" : token,
@@ -202,10 +229,18 @@ function doPost(e) {
         var item = "鳴子/片方";
         var data = cancelPaymentStatus(userId,userName,item,token);
         break;  
-      case "衣装" :
+      case "衣装(pd)" :
         var item = "衣装";
         var data = cancelPaymentStatus(userId,userName,item,token);
         break;
+      case "さくよさ(pd)" :
+          var item = "さくよさ";
+          var data = cancelPaymentStatus(userId,userName,item,token);
+        break;
+      case "能登よさこい(pd)" :
+          var item = "能登よさこい";
+          var data = cancelPaymentStatus(userId,userName,item,token);
+        break;    
       default :
         var data = {
           "replyToken" : token,
