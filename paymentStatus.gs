@@ -1,6 +1,6 @@
 // 支払い状況を更新・確認
 function paymentStatusInfo(userId, userName,item,setToken){
-  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1qCla9GOzlP0e2XHqbyWb8N66RdaeU8ClHCuXhcaAC3k");
+  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
   var ss = sheet.getSheets()[0];
   ss.sort(3,false);
   var lastRow = ss.getLastRow();
@@ -8,7 +8,7 @@ function paymentStatusInfo(userId, userName,item,setToken){
   
   var count = lastRow + 1;
   for(var i=1; i<=lastRow+1; i++){
-    if(ss.getRange(i, 1).getValue() == userId && ss.getRange(i, 5).getValue() == true && ss.getRange(i,4).getValue() == item){
+    if(ss.getRange(i, 1).getValue() == userId && ss.getRange(i, 6).getValue() == true && ss.getRange(i,3).getValue() == item){
       var data = {
         "replyToken" : setToken, 
         "messages" : [{
@@ -17,9 +17,9 @@ function paymentStatusInfo(userId, userName,item,setToken){
         }]
       };
       return data;
-    }else if(ss.getRange(i, 1).getValue() == userId && ss.getRange(i, 5).getValue() == false && ss.getRange(i, 4).getValue() == item){
-      ss.getRange(i, 5).setValue('true');
-      ss.getRange(i, 3).setValue(date);
+    }else if(ss.getRange(i, 1).getValue() == userId && ss.getRange(i, 6).getValue() == false && ss.getRange(i, 3).getValue() == item){
+      ss.getRange(i, 6).setValue('true');
+      ss.getRange(i, 5).setValue(date);
       var data = {
         "replyToken" : setToken, 
         "messages" : [{

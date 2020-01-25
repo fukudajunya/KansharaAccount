@@ -188,7 +188,7 @@ quick_rep_purchase = [{
         "action": {
           "type": "message",
           "label": "衣装",
-          "text" : "衣装"
+          "text" : "衣装(a)"
         }
       }
     ]
@@ -198,7 +198,7 @@ quick_rep_purchase = [{
 // 購入申請取消をQuickReplyで実装
 quick_rep_purchase_cancel = [{
   "type": "text",
-  "text": "どの物品の購入申請をキャンセルしますか？下のメニューから選択してください。",
+  "text": "どの申請をキャンセルしますか？下のメニューから選択してください。",
   "quickReply": {
     "items": [
       {
@@ -222,7 +222,23 @@ quick_rep_purchase_cancel = [{
         "action": {
           "type": "message",
           "label": "衣装",
-          "text" : "衣装"
+          "text" : "衣装(ad)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "さくよさ",
+          "text" : "さくよさ(ad)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "能登よさこい",
+          "text" : "能登よさこい(ad)"
         }
       }
     ]
@@ -256,7 +272,23 @@ quick_rep_payment = [{
         "action": {
           "type": "message",
           "label": "衣装",
-          "text" : "衣装"
+          "text" : "衣装(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "さくよさ",
+          "text" : "さくよさ(p)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "能登よさこい",
+          "text" : "能登よさこい(p)"
         }
       }
     ]
@@ -290,7 +322,23 @@ quick_rep_cancel_payment = [{
         "action": {
           "type": "message",
           "label": "衣装",
-          "text" : "衣装"
+          "text" : "衣装(pd)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "さくよさ",
+          "text" : "さくよさ(pd)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "能登よさこい",
+          "text" : "能登よさこい(pd)"
         }
       }
     ]
