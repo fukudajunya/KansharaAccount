@@ -18,13 +18,13 @@ function eventApplicationInfo(userId,userName,item,price,setToken){
   var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
   var ss = sheet.getSheets()[0];
   ss.sort(3,false);
-  ss.sort(5,false);
+　ss.sort(5,false);
   var lastRow = ss.getLastRow();
   var date = new Date();
   
   var count = lastRow + 1;
   for(var i=1; i<=lastRow+1; i++){
-    if(ss.getRange(i,1).getValue() == userId && ss.getRange(i,3).getValue() == item && ss.getRange(i,6).getValue() == false){
+    if(ss.getRange(i,1).getValue() == userId && ss.getRange(i,3).getValue() == item){
       var data = {
         "replyToken" : setToken, 
         "messages" : [{
