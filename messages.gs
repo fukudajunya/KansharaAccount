@@ -371,6 +371,32 @@ quick_rep_receive = [{
   }
 }]
 
+// 参加者リストをQuickReplyで実装
+quick_rep_participant = [{
+  "type": "text",
+  "text": "どのイベントの参加者リストを参照するか選択してください。",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "さくよさ",
+          "text" : "さくよさ(e)"
+        }
+      },
+     {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "能登よさこい",
+          "text" : "能登よさこい(e)"
+        }
+      }
+    ]
+  }
+}]
+
 // QuickReplyでメニューの実装
 quick_rep = [{
   "type": "text",
@@ -439,6 +465,14 @@ quick_rep = [{
           "type": "message",
           "label": "イベントに関して分からないことがある！",
           "text" : "イベント連絡"
+        }
+      },
+      { // 参加者リストを追加
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "イベントの参加者を知りたい！",
+          "text": "参加者リスト"
         }
       },
       {

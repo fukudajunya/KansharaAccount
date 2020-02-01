@@ -113,6 +113,13 @@ function doPost(e) {
           "messages" : quick_rep_receive
         };
         break;
+      //イベント参加者リスト
+      case "参加者リスト" :
+        var data = {
+          "replyToken" : token, 
+          "messages" : quick_rep_participant
+        };
+        break;  
       case "衣装の着方":
         var data =  {
         "replyToken" : token, 
@@ -151,6 +158,15 @@ function doPost(e) {
         var price = 20000;
         var data = eventApplicationInfo(userId,userName,item,price,token)
         break;   
+      //イベント参加者リスト参照用
+      case "さくよさ(e)" :
+        var item = "さくよさ";
+        var data = eventParticipantInfo(userId,userName,item,token)
+        break;
+      case "能登よさこい(e)" :
+        var item = "能登よさこい";
+        var data = eventParticipantInfo(userId,userName,item,token)
+        break;     
       case "支払い関連" :
         var data = {
           "replyToken" : token, 
