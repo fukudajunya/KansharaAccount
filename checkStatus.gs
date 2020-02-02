@@ -1,15 +1,8 @@
 // 申請状況確認
-// [Memo]
-// SpreadSheetのURL（備忘録）
-// https://docs.google.com/spreadsheets/d/1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w/edit#gid=0
-// 物品/イベント購入管理シートのフォーマット
-// getRange(i,1) ||getRange(i,2) ||getRange(i,3) ||getRange(i,4)  ||getRange(i,5) ||getRange(i,6) 
-// [userId]      ||[userName]    ||[item]        ||[price]        ||[date]        ||[PaymentFlg]
 function checkApplicationStatus(userId, setToken){
   // 物品/イベント購入管理シートの設定
   var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
   var ss = sheet.getSheets()[0];
-  ss.sort(3,false);
   var lastRow = ss.getLastRow();
   var count = lastRow + 1;
   var data = "";

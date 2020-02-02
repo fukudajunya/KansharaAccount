@@ -1,24 +1,6 @@
-// ===============================================================================================
-// (function) eventApplication
-// Nobuki Fukui
-// Description: イベント参加申請するfunction
-// -----------------------------------------------------------------------------------------------
-// Update: 2020/01/22, v1, purchaseApplication.gsを参考に作成
-//                         具体的にはgetRangeのrow,columnを変更
-// ----------------------------------------------------------------------------------------------
-// [Memo]
-// SpreadSheetのURL（備忘録）
-// https://docs.google.com/spreadsheets/d/1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w/edit#gid=0
-// 物品/イベント購入管理シートのフォーマット
-// getRange(i,1) ||getRange(i,2) ||getRange(i,3) ||getRange(i,4)  ||getRange(i,5) ||getRange(i,6) 
-// [userId]      ||[userName]    ||[item]        ||[price]        ||[date]        ||[PaymentFlg]
-// ss.appendRowでスプレッドシートの最下行に追加
-// ===============================================================================================
 function eventApplicationInfo(userId,userName,item,price,setToken){
   var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
   var ss = sheet.getSheets()[0];
-  ss.sort(3,false);
-　ss.sort(5,false);
   var lastRow = ss.getLastRow();
   var date = new Date();
   

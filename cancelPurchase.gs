@@ -2,7 +2,6 @@
 function cancelPurchaseApplication(userId,userName,item,setToken){
   var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
   var ss = sheet.getSheets()[0];
-  ss.sort(3,false);
   var lastRow = ss.getLastRow();
   var count = lastRow + 1;
   for(var i=1; i<= lastRow+1; i++){
