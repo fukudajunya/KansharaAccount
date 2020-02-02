@@ -54,11 +54,3 @@ function eventParticipantInfo(userId,userName,item,setToken){
       }
     }   
 }
-
-
-
-
-
-
-
-
