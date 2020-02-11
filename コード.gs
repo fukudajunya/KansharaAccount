@@ -1,5 +1,5 @@
 // LINEの認証を突破するために必要なお作法
-var secret_token = "HZkdrfdWZTu7g/HijXenVvLLvb5LHJkMlevJsRkZPslCDoPQEHl+P8EvXhMaLj9befLRnkoX2yb83K0S/TzB/iCwHDg8ZdRx5rEHIjEr7yIvQvcYiEwJytK19yfNbfWpHLYrvBMAnNb9iGf8Qf7fCQdB04t89/1O/w1cDnyilFU="
+var secret_token = "nbr6GESsLYzdMFtwhMAk9UhjWXgXPKU1eNb8ANbKhjGB7k3jlyebkyrwuiMMy00aD6NeY/aXeb8oXoQQKas/uLAVrdbvd5i/rFBA/Gjm7zLMFYcOKjDyEjcE6G33n3lHuudSoVW0wxs5CXk9fGbfUAdB04t89/1O/w1cDnyilFU="
 var secret = "Bearer " + secret_token;
 
 function doPost(e) {

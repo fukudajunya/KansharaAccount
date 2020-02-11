@@ -8,7 +8,7 @@ function eventParticipantInfo(userId,userName,item,setToken){
     var participantNumber = 0;
     for(var i=1; i<=lastRow+1; i++){
       if(ss.getRange(i,3).getValue() == item){
-        var participant = participant + ss.getRange(i,2).getValue() + "\n";
+        var participant = participant + ss.getRange(i,7).getValue() + "\n";
         var participantNumber = participantNumber + 1;
         count -= 1;
       }else if(count == 2){
