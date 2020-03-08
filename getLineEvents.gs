@@ -1,13 +1,17 @@
 function follow(e){
-  var spredsheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=16VzNu4uHgzAojaMTOF4Qyx2oc2edEvmjPc8Ge9UYcp4");
-  var sheet = spredsheet.getActiveSheet();
-  sheet.appendRow([e.source.userId]);
+  var spredsheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
+  var sheet = spredsheet.getSheetByName('あだ名管理シート');
+  var userId = e.source.userId;
+  var userName = getUserName(userId);
+  sheet.appendRow([userId, userName]);
 }
 
 function unfollow(e){
-  var spreadsheet = SpreadsheetApp.openByUrl('https://docs.google.com/spreadsheet/ccc?key=16VzNu4uHgzAojaMTOF4Qyx2oc2edEvmjPc8Ge9UYcp4'); 
-  var sheet = spreadsheet.getActiveSheet();
-  var result = findRow(sheet, e.source.userId, 1);
+  var spreadsheet = SpreadsheetApp.openByUrl('https://docs.google.com/spreadsheet/ccc?key=1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w'); 
+  var sheet = spredsheet.getSheetByName('あだ名管理シート');
+  var userId = e.source.userId;
+  var userName = getUserName(userId);
+  var result = findRow(sheet, userId, userName, 1);
   if(result > 0){
     sheet.deleteRows(result);
   }

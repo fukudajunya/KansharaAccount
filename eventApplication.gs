@@ -1,5 +1,5 @@
 function eventApplicationInfo(userId,userName,item,price,setToken){
-  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
+  var sheet = SpreadsheetApp.openById("1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
   var ss = sheet.getSheets()[0];
   var lastRow = ss.getLastRow();
   var date = new Date();
@@ -22,7 +22,7 @@ function eventApplicationInfo(userId,userName,item,price,setToken){
         "replyToken" : setToken, 
         "messages" : [{
           "type" : "text",
-          "text" : item + "の参加申請を受け付けました。\n\n参加申請をキャンセルする場合はメニューの「その他、購入/参加申請を取り消したい」から取り消しをしてください。"
+          "text" : item + "の参加申請を受け付けました。\n\n参加申請をキャンセルする場合はメニューの[その他]→[購入/参加申請を取り消したい]から取り消しをしてください。"
         }]
       };
       Logger.log(data)

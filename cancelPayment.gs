@@ -1,6 +1,6 @@
 // 支払い確認キャンセル
 function cancelPaymentStatus(userId,userName,item,setToken){
-  var sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheet/ccc?key=1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
+  var sheet = SpreadsheetApp.openById("1o4ic-nhGv7szSHVO2HBtRZfjqhEJvvXqTxS441a7J4w");
   var ss = sheet.getSheets()[0];
   var lastRow = ss.getLastRow();
   var count = lastRow + 1;
@@ -21,7 +21,7 @@ function cancelPaymentStatus(userId,userName,item,setToken){
           "replyToken" : setToken, 
           "messages" : [{
             "type" : "text",
-            "text" : "直近で" + item + "の購入/参加申請はされていません。キャンセルできませんでした。"
+            "text" : "直近で" + item + "の支払申請はされていません。キャンセルできませんでした。"
           }]
         };
         return data;
@@ -31,7 +31,7 @@ function cancelPaymentStatus(userId,userName,item,setToken){
         "replyToken" : setToken, 
         "messages" : [{
           "type" : "text",
-          "text" : "直近で" + item + "の購入/参加申請はされていません。キャンセルできませんでした。"
+          "text" : "直近で" + item + "の支払申請はされていません。キャンセルできませんでした。"
         }]
       };
       return data;
