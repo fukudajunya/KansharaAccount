@@ -80,13 +80,11 @@ function doPost(e) {
           var data = returnMessage(token, "作成中です！しばらく待ってね。");
           break;
         case "振り動画" :
-          var data = returnMessage(token, "振り動画は制作中です！しばらく待ってね。");
-          /*
+          //var data = returnMessage(token, "振り動画は制作中です！しばらく待ってね。");
           var data =  {
           "replyToken" : token, 
           "messages" : [ret_msg_mv]
           };
-          */  
           break;
         case "持ち物確認" :
           var data = returnMessage(token, "衣装が完成したら、持ち物を教えるね！");

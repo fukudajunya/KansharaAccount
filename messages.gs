@@ -85,76 +85,16 @@ ret_msg_mv = {
                  "text": "それぞれ有効に使ってね",
                  "actions": 
                         [{"type": "uri",
-                          "label": "かんしゃらで踊るにあたって",
-                          "uri": "https://youtu.be/8sAWJGsyLHg"},
+                          "label": "NAZ センター取り説明動画",
+                          "uri": "https://youtu.be/bXvcxLxTrig"},
                          {"type": "uri",
-                          "label": "曲通し",
-                          "uri": "https://youtu.be/HXVOWUdn3_M"},
+                          "label": "曲通し(前から)",
+                          "uri": "https://youtu.be/H2uYj0VvuPY"},
                          {"type": "uri",
-                          "label": "センター取り説明",
-                          "uri": "https://youtu.be/JzjrUgptofg"},
+                          "label": "曲通し(後ろから)",
+                          "uri": "https://youtu.be/A7DJsYtZeF0"},
                         ]
-                  },
-                 {
-                  "title": "解説動画①",
-                  "text": "振りの細かい解説をしてるよ",
-                  "actions": 
-                         [{"type": "uri",
-                           "label": "冒頭",
-                           "uri": "https://youtu.be/pUoVnCmtxvY"},
-                          {"type": "uri",
-                           "label": "つけまつける～歌前",
-                           "uri": "https://youtu.be/qZYM3_FKTlc"},
-                          {"type": "uri",
-                           "label": "灰色の空に～泣いただろう",
-                           "uri": "https://youtu.be/_DTy7G5cWjg"},
-                 ]
-                 },
-                 {
-                  "title": "解説動画②",
-                  "text": "全部見てね",
-                  "actions": 
-                　　　　　[{"type": "uri",
-                  　　　　　"label": "少しだけ～自由の翼広げ",
-                  　　　　　"uri": "https://youtu.be/u17V2K1_E5g"},
-                  　　　　{"type": "uri",
-                  　　　　 "label": "Alegría～明日へと続く道",
-                          "uri": "https://youtu.be/Le159RmkbGI"},
-                         {"type": "uri",
-                          "label": "センターかち割り",
-                          "uri": "https://youtu.be/LkrSe7NMSlg"},
-                 ]
-    　　　　　　　　},
-                 {
-                  "title": "解説動画③",
-                  "text": "忘れた頃に、また見てね",
-                  "actions": 
-                　　　　　[{"type": "uri",
-                  　　　　　"label": "穿たれた～腕4回くるくる",
-                  　　　　　"uri": "https://youtu.be/cT0XDZIl6Zw"},
-                  　　　　{"type": "uri",
-                  　　　　 "label": "新しい～よさこい節前",
-                          "uri": "https://youtu.be/NvFQcoYn15I"},
-                         {"type": "uri",
-                          "label": "よさこい節",
-                          "uri": "https://youtu.be/yqDsBhkZGw4"},
-                 ]
-    　　　　　　　　},
-                 {
-                  "title": "解説動画④&パレード振り",
-                  "text": "こねこねは頑張って覚えてね",
-                  "actions": 
-                　　　　　[{"type": "uri",
-                  　　　　　"label": "こねこね",
-                  　　　　　"uri": "https://youtu.be/t6WmdNOyiO0"},
-                  　　　　{"type": "uri",
-                  　　　　 "label": "右腕ドリル～最後",
-                          "uri": "https://youtu.be/jZX8dSpLqLc"},
-                         {"type": "uri",
-                          "label": "パレード振り説明",
-                          "uri": "https://youtu.be/hDwJfXeIICE"},
-                 ]
-    　　　　　　　　}
+                  }
                ]
   },
   "altText": "振り動画"
