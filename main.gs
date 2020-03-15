@@ -262,6 +262,25 @@ function doPost(e) {
           var data = cancelPaymentStatus(userId,userName,item,token);
           break;
           */
+        case "動画チェック" :
+          var data = {
+            "replyToken" : token,
+            "messages" : quick_rep_movie_check
+          };
+          break;
+        // 地域ごとに動画チェック申請を行う
+        case "大阪(m)" :
+          var place = "大阪";
+          var data = addCard(userId, place, token);
+          break;
+        case "東京(m)" :
+          var place = "東京";
+          var data = addCard(userId, place, token);
+          break;
+        case "名古屋(m)" :
+          var place = "名古屋";
+          var data = addCard(userId, place, token);
+          break;
         default :
           var data = {
             "replyToken" : token,

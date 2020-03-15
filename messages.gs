@@ -316,7 +316,7 @@ quick_rep_participant = [{
 // QuickReplyでメニューの実装
 quick_rep = [{
   "type": "text",
-  "text": "知りたい情報を下のメニューからスクロールして探してね。\n\n・衣装の着方について\n・申請状況確認\n・購入/参加申請の取消\n・支払い確認の取消\n・イベント参加者確認\n・備品などの料金確認\n・振込先の確認\n\nあだ名を登録する場合は、「あだ名　XXX」とコメントしてください。",
+  "text": "知りたい情報を下のメニューからスクロールして探してね。\n\n・衣装の着方について\n・申請状況確認\n・購入/参加申請の取消\n・支払い確認の取消\n・イベント参加者確認\n・備品などの料金確認\n・振込先の確認\n・動画チェクを受けたい\n\nあだ名を登録する場合は、「あだ名　XXX」とコメントしてください。",
   "quickReply": {
     "items": [
       {
@@ -374,9 +374,51 @@ quick_rep = [{
           "label": "イベントの参加者を知りたい！",
           "text": "参加者リスト"
         }
+      },
+      { // 動画チェック申請を追加
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "動画をチェックしてほしい!",
+          "text": "動画チェック"
+        }
       }
     ]
   }
+}]
+
+// 動画確認対象者の地域
+quick_rep_movie_check = [{
+  "type": "text",
+  "text": "自分が踊っている支部を教えてね!",
+  "quickReply": {
+    "items": [
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "大阪",
+          "text" : "大阪(m)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "東京",
+          "text" : "東京(m)"
+        }
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "message",
+          "label": "名古屋",
+          "text" : "名古屋(m)"
+        }
+      }
+    ]
+  } 
 }]
 
 // 管理者コマンド
